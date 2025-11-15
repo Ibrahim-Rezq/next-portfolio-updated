@@ -4,7 +4,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowLeft, Code2, Zap, AlertCircle, ExternalLink } from 'lucide-react'
 import { LiaGithub } from 'react-icons/lia'
-import { getProjectById, getAllProjects } from '@/lib/data'
+import { getProjectById, getAllProjects } from '@/lib/consts'
 import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
 
@@ -189,7 +189,7 @@ export default async function ProjectDetailPage({ params }: Props) {
                                                     key={index}
                                                     className='flex items-start gap-3'
                                                 >
-                                                    <span className='inline-block w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0' />
+                                                    <span className='inline-block w-2 h-2 rounded-full bg-primary mt-2 shrink-0' />
                                                     <span className='text-muted-foreground'>
                                                         {feature}
                                                     </span>
@@ -214,7 +214,7 @@ export default async function ProjectDetailPage({ params }: Props) {
                                                     key={index}
                                                     className='flex items-start gap-3'
                                                 >
-                                                    <span className='inline-block w-2 h-2 rounded-full bg-accent mt-2 flex-shrink-0' />
+                                                    <span className='inline-block w-2 h-2 rounded-full bg-accent mt-2 shrink-0' />
                                                     <span className='text-muted-foreground'>
                                                         {challenge}
                                                     </span>

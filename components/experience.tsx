@@ -1,4 +1,4 @@
-import { experience } from '@/lib/data'
+import { experience } from '@/lib/consts'
 
 export function Experience() {
     return (

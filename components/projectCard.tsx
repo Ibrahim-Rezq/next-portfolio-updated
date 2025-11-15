@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { LiaGithub } from 'react-icons/lia'
 import { ArrowRight, BadgeCheckIcon, ExternalLink } from 'lucide-react'
 import { Badge } from './ui/badge'
-import { Project } from '@/lib/data'
+import { Project } from '@/lib/consts'
 
 function ProjectCard({ project }: { project: Project }) {
     const { id, image, name, github, liveDemo, description, tech, featured } =

@@ -1,6 +1,6 @@
 import { Navigation } from '@/components/navigation'
 import { Footer } from '@/components/footer'
-import { projectsData } from '@/lib/data'
+import { projectsData } from '@/lib/consts'
 import ProjectCard from '@/components/projectCard'
 import { ExternalLink } from 'lucide-react'
 export const metadata = {

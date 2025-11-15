@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react'
 import { Menu, X, Moon, Sun } from 'lucide-react'
 import { useTheme } from 'next-themes'
-import { navLinks } from '@/lib/data'
+import { navLinks } from '@/lib/consts'
 
 export function Navigation() {
     const [isOpen, setIsOpen] = useState(false)

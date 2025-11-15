@@ -1,4 +1,4 @@
-import { skillCategories, certifications } from '@/lib/data'
+import { skillCategories, certifications } from '@/lib/consts'
 
 export function Skills() {
     return (

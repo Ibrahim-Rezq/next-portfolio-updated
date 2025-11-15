@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { projectsData } from '@/lib/data'
+import { projectsData } from '@/lib/consts'
 import ProjectCard from './projectCard'
 import { ExternalLink } from 'lucide-react'
 

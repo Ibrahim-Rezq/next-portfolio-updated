@@ -11,20 +11,10 @@ export const metadata: Metadata = {
     title: 'Ibrahim Rezq - Frontend Developer',
     description:
         'Frontend Developer specialized in React and Next.js. Building responsive UIs and production-ready applications.',
-    generator: 'v0.app',
     icons: {
         icon: [
             {
-                url: '/icon-light-32x32.png',
-                media: '(prefers-color-scheme: light)',
-            },
-            {
-                url: '/icon-dark-32x32.png',
-                media: '(prefers-color-scheme: dark)',
-            },
-            {
-                url: '/icon.svg',
-                type: 'image/svg+xml',
+                url: '/icon.png',
             },
         ],
         apple: '/apple-icon.png',
