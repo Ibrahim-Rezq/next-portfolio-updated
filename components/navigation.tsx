@@ -3,109 +3,102 @@
 import { useState, useEffect } from 'react'
 import { Menu, X, Moon, Sun } from 'lucide-react'
 import { useTheme } from 'next-themes'
+import { navLinks } from '@/lib/data'
 
 export function Navigation() {
-  const [isOpen, setIsOpen] = useState(false)
-  const [mounted, setMounted] = useState(false)
-  const { theme, setTheme } = useTheme()
+    const [isOpen, setIsOpen] = useState(false)
+    const { theme, setTheme } = useTheme()
 
-  useEffect(() => {
-    setMounted(true)
-  }, [])
+    const handleThemeToggle = () => {
+        setTheme(theme === 'dark' ? 'light' : 'dark')
+    }
 
-  const navLinks = [
-    { href: '#projects', label: 'Projects' },
-    { href: '#experience', label: 'Experience' },
-    { href: '#skills', label: 'Skills' },
-    { href: '#contact', label: 'Contact' },
-  ]
+    return (
+        <nav className='sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur-sm'>
+            <div className='max-w-6xl mx-auto px-6 py-4 flex items-center justify-between'>
+                <a href='#' className='text-xl font-bold text-primary'>
+                    IR
+                </a>
 
-  const handleThemeToggle = () => {
-    setTheme(theme === 'dark' ? 'light' : 'dark')
-  }
+                {/* Desktop Navigation */}
+                <div className='hidden md:flex items-center gap-8'>
+                    {navLinks.map((link) => (
+                        <a
+                            key={link.href}
+                            href={link.href}
+                            className='text-sm text-muted-foreground hover:text-foreground transition-colors'
+                        >
+                            {link.label}
+                        </a>
+                    ))}
 
-  return (
-    <nav className="sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur-sm">
-      <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-        <a href="#" className="text-xl font-bold text-primary">
-          IR
-        </a>
-        
-        {/* Desktop Navigation */}
-        <div className="hidden md:flex items-center gap-8">
-          {navLinks.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              className="text-sm text-muted-foreground hover:text-foreground transition-colors"
-            >
-              {link.label}
-            </a>
-          ))}
-          
-          {mounted && (
-            <button
-              onClick={handleThemeToggle}
-              className="p-2 text-muted-foreground hover:text-foreground transition-colors rounded-lg hover:bg-muted"
-              aria-label="Toggle theme"
-              title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
-            >
-              {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
-            </button>
-          )}
+                    <button
+                        onClick={handleThemeToggle}
+                        className='p-2 text-muted-foreground hover:text-foreground transition-colors rounded-lg hover:bg-muted'
+                        aria-label='Toggle theme'
+                        title={
+                            theme === 'dark'
+                                ? 'Switch to light mode'
+                                : 'Switch to dark mode'
+                        }
+                    >
+                        {theme === 'dark' ? (
+                            <Sun size={20} />
+                        ) : (
+                            <Moon size={20} />
+                        )}
+                    </button>
 
-          <a
-            href="mailto:ebrahimamin391@gmail.com"
-            className="text-sm px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:opacity-90 transition"
-          >
-            Get in touch
-          </a>
-        </div>
+                    <a
+                        href='mailto:ebrahimamin391@gmail.com'
+                        className='text-sm px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:opacity-90 transition'
+                    >
+                        Get in touch
+                    </a>
+                </div>
 
-        {/* Mobile Navigation */}
-        <button
-          onClick={() => setIsOpen(!isOpen)}
-          className="md:hidden text-foreground"
-          aria-label="Toggle menu"
-        >
-          {isOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
-      </div>
+                {/* Mobile Navigation */}
+                <button
+                    onClick={() => setIsOpen(!isOpen)}
+                    className='md:hidden text-foreground'
+                    aria-label='Toggle menu'
+                >
+                    {isOpen ? <X size={24} /> : <Menu size={24} />}
+                </button>
+            </div>
 
-      {/* Mobile Menu */}
-      {isOpen && (
-        <div className="md:hidden border-t border-border bg-card">
-          <div className="max-w-6xl mx-auto px-6 py-4 space-y-3">
-            {navLinks.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                className="block text-sm text-muted-foreground hover:text-foreground transition-colors py-2"
-                onClick={() => setIsOpen(false)}
-              >
-                {link.label}
-              </a>
-            ))}
-            {mounted && (
-              <button
-                onClick={() => {
-                  handleThemeToggle()
-                  setIsOpen(false)
-                }}
-                className="w-full text-left text-sm text-muted-foreground hover:text-foreground transition-colors py-2 px-2 rounded hover:bg-muted"
-              >
-                {theme === 'dark' ? 'Light Mode' : 'Dark Mode'}
-              </button>
+            {/* Mobile Menu */}
+            {isOpen && (
+                <div className='md:hidden border-t border-border bg-card'>
+                    <div className='max-w-6xl mx-auto px-6 py-4 space-y-3'>
+                        {navLinks.map((link) => (
+                            <a
+                                key={link.href}
+                                href={link.href}
+                                className='block text-sm text-muted-foreground hover:text-foreground transition-colors py-2'
+                                onClick={() => setIsOpen(false)}
+                            >
+                                {link.label}
+                            </a>
+                        ))}
+                        <button
+                            onClick={() => {
+                                handleThemeToggle()
+                                setIsOpen(false)
+                            }}
+                            className='w-full text-left text-sm text-muted-foreground hover:text-foreground transition-colors py-2 px-2 rounded hover:bg-muted'
+                        >
+                            {theme === 'dark' ? 'Light Mode' : 'Dark Mode'}
+                        </button>
+                        <a
+                            href='mailto:ebrahimamin391@gmail.com'
+                            className='block text-sm px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:opacity-90 transition text-center'
+                        >
+                            Get in touch
+                        </a>
+                    </div>
+                </div>
             )}
-            <a
-              href="mailto:ebrahimamin391@gmail.com"
-              className="block text-sm px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:opacity-90 transition text-center"
-            >
-              Get in touch
-            </a>
-          </div>
-        </div>
-      )}
-    </nav>
-  )
+        </nav>
+    )
 }

@@ -7,17 +7,17 @@ import { Contact } from '@/components/contact'
 import { Footer } from '@/components/footer'
 
 export default function Home() {
-  return (
-    <div className="bg-background text-foreground">
-      <Navigation />
-      <main>
-        <Hero />
-        <Projects />
-        <Experience />
-        <Skills />
-        <Contact />
-      </main>
-      <Footer />
-    </div>
-  )
+    return (
+        <div className='bg-background text-foreground'>
+            <Navigation />
+            <main>
+                <Hero />
+                <Projects />
+                <Experience />
+                <Skills />
+                <Contact />
+            </main>
+            <Footer />
+        </div>
+    )
 }
