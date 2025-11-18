@@ -1,23 +1,19 @@
-import { Navigation } from '@/components/navigation'
-import { Hero } from '@/components/hero'
-import { Projects } from '@/components/projects'
-import { Experience } from '@/components/experience'
-import { Skills } from '@/components/skills'
-import { Contact } from '@/components/contact'
-import { Footer } from '@/components/footer'
+import { Hero } from '@/components/landing/hero'
+import { Projects } from '@/components/landing/projects'
+import { Experience } from '@/components/landing/experience'
+import { Skills } from '@/components/landing/skills'
+import { Contact } from '@/components/landing/contact'
 
 export default function Home() {
-    return (
-        <div className='bg-background text-foreground'>
-            <Navigation />
-            <main>
-                <Hero />
-                <Projects />
-                <Experience />
-                <Skills />
-                <Contact />
-            </main>
-            <Footer />
-        </div>
-    )
+	return (
+		<div className="bg-background text-foreground">
+			<main>
+				<Hero />
+				<Projects />
+				<Experience />
+				<Skills />
+				<Contact />
+			</main>
+		</div>
+	)
 }
