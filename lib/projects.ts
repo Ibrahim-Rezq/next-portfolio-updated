@@ -3,104 +3,142 @@ export const data: Project[] = [
 		id: 'portfolio-website',
 		name: 'Personal Portfolio & Blog Website',
 		description:
-			'Built with TypeScript, Next.js and Contentful CMS. Minimal, clean UI with an integrated blog system.',
+			'Built with Next.js and TypeScript for a modern, responsive portfolio showcasing projects and technical expertise.',
 		fullDescription:
-			'A professional personal portfolio website featuring a integrated blog system powered by Contentful CMS. The site showcases projects with detailed case studies, optimized for both performance and SEO with server-side rendering and static generation.',
-		tech: ['Next.js', 'TypeScript', 'Contentful', 'Tailwind CSS', 'Vercel'],
+			'A professional personal portfolio website built with Next.js and TypeScript. The site showcases projects with clean, minimal design and serves as an online professional profile. Deployed on Vercel with CSS Modules for scoped styling.',
+		tech: ['Next.js', 'TypeScript', 'React', 'CSS Modules', 'Vercel'],
 		github: 'https://github.com/Ibrahim-Rezq/portfolio',
 		image: '/portfolio-website-ui.jpg',
-		problem:
-			'Needed a flexible, scalable platform to showcase projects and share technical insights through a blog.',
+		problem: 'Wanted to create a professional online presence to showcase projects and skills as a web developer.',
 		solution:
-			'Built a headless CMS-powered portfolio using Next.js with Contentful for easy content management and Vercel for seamless deployment.',
+			'Built a Next.js application with TypeScript for type safety, CSS Modules for maintainable styling, and deployed on Vercel for seamless hosting.',
 		keyFeatures: [
-			'Blog system with tags and categories',
-			'Project case studies',
-			'SEO optimized',
-			'Dark mode support',
-			'Responsive design'
+			'Dynamic React app using Next.js',
+			'TypeScript for enhanced code quality',
+			'Responsive UI design with CSS Modules',
+			'Optimized images and assets',
+			'Seamless Vercel deployment'
 		],
 		challenges: [
-			'Optimizing Contentful API calls',
-			'Building effective pagination',
-			'Maintaining consistent branding'
+			'Configuring Next.js routing and features',
+			'Implementing TypeScript best practices',
+			'Optimizing web performance'
 		],
-		liveDemo: 'https://ibrahim-rezq.vercel.app/'
+		liveDemo: 'https://game-dev-rose.vercel.app'
 	},
 	{
 		id: 'quotes-api',
 		name: 'Quotes API + Frontend Application',
 		description:
-			'Full-stack project featuring both API and UI. Integrated user authentication and database management.',
+			'Full-stack Next.js 14 application with TypeScript, Prisma ORM, NextAuth authentication, and Tailwind CSS styling.',
 		fullDescription:
-			'A complete full-stack application providing a comprehensive quotes management system. Features include user authentication, CRUD operations, database relationships, and a polished frontend UI built with React and TypeScript.',
-		tech: ['Next.js', 'TypeScript', 'Prisma', 'NextAuth', 'PostgreSQL'],
-		github: 'https://github.com/Ibrahim-Rezq/quotes-api',
+			'A complete full-stack application providing a comprehensive quotes management system. Built with Next.js 14, featuring user authentication via NextAuth with Prisma Adapter, Prisma ORM for database operations, email integration with Nodemailer, and a polished UI with Tailwind CSS and DaisyUI. Includes RESTful API endpoints for quote management.',
+		tech: [
+			'Next.js 14',
+			'TypeScript',
+			'Prisma ORM',
+			'NextAuth.js',
+			'Tailwind CSS',
+			'DaisyUI',
+			'Zod',
+			'React Hook Form',
+			'Nodemailer'
+		],
+		github: 'https://github.com/Ibrahim-Rezq/quotes_api',
 		image: '/quotes-app-dashboard.jpg',
 		problem:
-			'Wanted to build a full-stack application demonstrating both backend API development and frontend integration with authentication.',
+			'Wanted to practice backend integration within a modern Next.js application, exploring database design, authentication, and API route handling.',
 		solution:
-			'Developed a full-stack solution with Next.js API routes, Prisma ORM for database operations, and NextAuth for secure user authentication.',
+			'Developed a full-stack solution with Next.js 14 API routes, Prisma ORM for database operations, NextAuth for secure authentication, and Tailwind CSS for responsive UI.',
 		keyFeatures: [
-			'User authentication',
-			'Quote CRUD operations',
-			'Database relationships',
-			'TypeScript throughout',
-			'RESTful API'
+			'User authentication with NextAuth',
+			'Quote CRUD operations via API',
+			'Prisma database schema and migrations',
+			'RESTful API endpoints (/api/quotes)',
+			'Email integration with Nodemailer',
+			'Form validation with Zod and React Hook Form',
+			'Responsive UI with Tailwind and DaisyUI'
 		],
-		challenges: ['Implementing secure authentication', 'Database schema design', 'API route organization'],
+		challenges: [
+			'Prisma schema design and migrations',
+			'NextAuth integration with Prisma',
+			'Secure environment variable management',
+			'API endpoint organization in App Router'
+		],
 		liveDemo: 'https://quotes-api-five.vercel.app/',
 		featured: true
 	},
 	{
 		id: 'ecommerce-frontend',
-		name: 'E-commerce Front-end Collaboration',
+		name: 'E-commerce Full Stack Application',
 		description:
-			"Front-end implementation of an e-commerce app integrated with a teammate's backend. Full responsive design.",
+			'Complete e-commerce platform with React.js frontend and Django REST API backend. Includes product catalog, cart management, checkout flow, and admin dashboard.',
 		fullDescription:
-			'A production-ready e-commerce frontend built in collaboration with a backend developer. The application features product browsing, shopping cart management, checkout flow, and payment integration with a REST API backend.',
-		tech: ['React', 'TypeScript', 'REST APIs', 'Tailwind CSS', 'Redux'],
+			'A production-ready full-stack e-commerce application developed as part of the Sprints Bootcamp Program. Features a React.js SPA frontend with Redux Toolkit state management and a Django REST API backend. Provides complete shopping experience with user authentication, product browsing, shopping cart, order management, and an admin dashboard for business operations.',
+		tech: [
+			'React.js',
+			'Redux Toolkit',
+			'React Router v6',
+			'Django REST Framework',
+			'Bootstrap',
+			'Styled Components',
+			'Axios',
+			'SQLite',
+			'TypeScript'
+		],
 		github: 'https://github.com/Ibrahim-Rezq/sprints-ecommerce-fullstack',
 		image: '/ecommerce-shop-frontend.jpg',
 		problem:
-			'Needed to build a responsive, production-ready e-commerce UI that integrates seamlessly with an existing backend API.',
+			'Needed to build a complete e-commerce platform demonstrating full-stack development with team collaboration, integrating frontend and backend systems.',
 		solution:
-			'Created a scalable React frontend with Redux for state management, TypeScript for type safety, and Tailwind CSS for responsive design.',
+			'Developed a scalable full-stack application with React frontend using Redux for state management, Django REST API backend for business logic, and SQLite database for data persistence.',
 		keyFeatures: [
-			'Product catalog with filtering',
-			'Shopping cart functionality',
-			'User authentication',
-			'Responsive design',
-			'Payment integration'
+			'User registration and authentication',
+			'Product catalog with search and filtering',
+			'Shopping cart management',
+			'Order creation and tracking',
+			'Admin dashboard with sales analytics',
+			'User profile management',
+			'Responsive design with Bootstrap',
+			'Protected routes for authenticated users'
 		],
-		challenges: ['Complex state management', 'API integration coordination', 'Cross-browser compatibility'],
+		challenges: [
+			'Complex Redux state management',
+			'Frontend-backend API coordination',
+			'Cross-browser compatibility',
+			'Responsive design implementation',
+			'Team collaboration and code reviews'
+		],
+		liveDemo: 'https://github.com/Ibrahim-Rezq/sprints-ecommerce-fullstack',
 		featured: true
 	},
 	{
 		id: 'landing-page',
 		name: 'Modern Landing Page',
 		description:
-			'Minimal agency landing page emphasizing clean UI and user experience. Built with vanilla technologies.',
+			'Minimal agency landing page built with HTML5, CSS3, and semantic markup. Demonstrates modern CSS layout techniques including Flexbox and CSS Grid.',
 		fullDescription:
-			'A modern, visually striking landing page for a digital agency. Built with vanilla HTML, CSS, and JavaScript to demonstrate fundamental web development skills and design implementation without frameworks.',
-		tech: ['HTML5', 'CSS3', 'JavaScript', 'Responsive Design'],
+			'A modern, pixel-perfect landing page recreating the Doom Minimal Agency Template from Graphberry. Built with vanilla HTML5 and CSS3 to practice responsive design, Flexbox, and CSS Grid layout systems. Features semantic markup, CSS custom properties for theming, and clean, maintainable code structure.',
+		tech: ['HTML5', 'CSS3', 'Flexbox', 'CSS Grid', 'CSS Custom Properties', 'Responsive Design'],
 		github: 'https://github.com/Ibrahim-Rezq/modern-landing-layout',
 		image: '/landing-page-design.jpg',
 		problem:
-			'Wanted to create an impressive landing page using vanilla web technologies while maintaining clean, maintainable code.',
+			'Wanted to practice building pixel-perfect layouts from design templates using modern CSS layout techniques.',
 		solution:
-			'Built a semantic HTML structure with custom CSS animations, vanilla JavaScript interactions, and a fully responsive mobile-first design.',
+			'Built a semantic HTML structure with CSS Grid and Flexbox for complex layouts, CSS custom properties for maintainable theming, and a fully responsive mobile-first design.',
 		keyFeatures: [
-			'Custom CSS animations',
-			'Vanilla JavaScript interactions',
-			'Mobile-first responsive design',
-			'Semantic HTML',
-			'Performance optimized'
+			'Pixel-perfect layout implementation',
+			'CSS Grid and Flexbox mastery',
+			'Semantic HTML5 markup',
+			'CSS custom properties for theming',
+			'Responsive design for multiple screen sizes',
+			'Clean and maintainable code organization'
 		],
 		challenges: [
-			'Cross-browser CSS compatibility',
-			'Animation performance',
-			'Mobile responsiveness without frameworks'
+			'Translating design mockups to code',
+			'Implementing responsive breakpoints',
+			'CSS Grid and Flexbox optimization',
+			'Cross-browser CSS compatibility'
 		],
 		liveDemo: 'https://ibrahim-rezq.github.io/modern-landing-layout/'
 	}

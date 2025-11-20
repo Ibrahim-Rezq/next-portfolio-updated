@@ -1,5 +1,5 @@
 import { links } from '@/lib/consts'
-import { Mail, Phone, Globe } from 'lucide-react'
+import { Mail, Globe } from 'lucide-react'
 import { FaGithub } from 'react-icons/fa'
 import { LiaWhatsapp } from 'react-icons/lia'
 

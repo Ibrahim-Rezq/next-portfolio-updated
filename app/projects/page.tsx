@@ -1,5 +1,3 @@
-import { Navigation } from '@/components/layout/navigation'
-import { Footer } from '@/components/layout/footer'
 import ProjectCard from '@/components/projects/projectCard'
 import { ExternalLink } from 'lucide-react'
 import { links } from '@/lib/consts'

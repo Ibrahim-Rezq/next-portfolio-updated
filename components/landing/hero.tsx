@@ -35,9 +35,9 @@ export function Hero() {
 				</div>
 				{/* Hero Image */}
 				<div className="flex justify-center">
-					<div className="relative w-full max-w-sm aspect-square rounded-2xl overflow-hidden border-2 border-primary/30 shadow-xl">
+					<div className="relative w-full max-w-sm aspect-square overflow-hidden rounded-full">
 						<Image
-							src="/professional-developer-portrait.jpg"
+							src="/professional-developer-portrait.png"
 							alt="Ibrahim Rezq - Frontend Developer"
 							fill
 							className="object-cover"

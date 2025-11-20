@@ -1,5 +1,5 @@
 {
-	"name": "my-v0-project",
+	"name": "ibrahim-rezq",
 	"version": "0.1.0",
 	"private": true,
 	"scripts": {
@@ -7,6 +7,7 @@
 		"dev": "next dev",
 		"lint": "eslint .",
 		"format": "prettier --write .",
+		"prepare": "yarn format && yarn lint --fix",
 		"start": "next start"
 	},
 	"dependencies": {
