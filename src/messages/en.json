@@ -1,0 +1,99 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "blog": "Blog",
+    "work": "Work",
+    "contact": "Contact",
+    "downloadCV": "Download CV",
+    "toggleTheme": "Toggle theme",
+    "toggleLanguage": "Switch to Arabic",
+    "openMenu": "Open menu",
+    "commandHint": "Search"
+  },
+  "hero": {
+    "eyebrow": "Next.js & React Developer",
+    "greeting": "Hi, I'm Ibrahim",
+    "title": "I build web apps that actually work.",
+    "tagline": "Full-stack developer from Egypt. I care about clean code — but I care more about shipping something that solves the problem.",
+    "viewWork": "View my work",
+    "downloadCV": "Download CV"
+  },
+  "stats": [
+    { "value": "3+", "label": "Years shipping" },
+    { "value": "12+", "label": "Projects built" },
+    { "value": "EN · AR", "label": "Bilingual" }
+  ],
+  "experience": {
+    "eyebrow": "Where I've worked",
+    "title": "Experience"
+  },
+  "projects": {
+    "eyebrow": "Selected work",
+    "title": "Projects",
+    "viewSource": "View source",
+    "liveDemo": "Live demo"
+  },
+  "skills": {
+    "eyebrow": "What I work with",
+    "title": "Skills"
+  },
+  "contact": {
+    "eyebrow": "Say salam",
+    "title": "Get in touch",
+    "message": "Have a project in mind, or just want to say hi? I'd love to hear from you.",
+    "sendEmail": "Send email",
+    "elsewhere": "Or find me elsewhere"
+  },
+  "about": {
+    "eyebrow": "A little more",
+    "title": "About me",
+    "bio": [
+      "I build web apps with Next.js and React — that's where I do my best work. Over the past few years I've shipped production applications for clients, built internal tools and dashboards, and worked across the stack from component architecture to Express backends. I care about writing clean code, but I care more about shipping something that actually solves the problem.",
+      "I've done everything from converting Figma designs into pixel-perfect UIs to building data pipelines and student tracking systems. Currently focused on the React and Next.js ecosystem, and always looking for interesting problems to work on."
+    ],
+    "educationTitle": "Education",
+    "education": "Benha University — Bachelor's Degree, Nursing (2018–2022)",
+    "certificatesTitle": "Certificates",
+    "certificates": [
+      "React Development Cross-Skilling — EGFWD | Udacity",
+      "Advanced Full-Stack Web Development — EGFWD | Udacity",
+      "Front End Web Development Professional — EGFWD | Udacity"
+    ],
+    "note": "Military service fulfilled. Based in Egypt.",
+    "backHome": "Back home"
+  },
+  "blog": {
+    "eyebrow": "From the desk",
+    "title": "Writing",
+    "readMore": "Read post",
+    "minRead": "min read",
+    "backToAll": "All posts",
+    "noPosts": "No posts yet. Check back soon.",
+    "langFallback": "This post isn't available in your language — showing the original.",
+    "postedOn": "Posted on"
+  },
+  "footer": {
+    "tagline": "Built with care in Egypt.",
+    "copyright": "© 2026 Ibrahim Amin",
+    "builtWith": "Built with Next.js & coffee from Egypt."
+  },
+  "command": {
+    "placeholder": "Type a command or search…",
+    "empty": "No results found.",
+    "groupNav": "Navigate",
+    "groupActions": "Actions",
+    "groupSocial": "Find me",
+    "goHome": "Go to Home",
+    "goAbout": "Go to About",
+    "goBlog": "Go to Blog",
+    "goWork": "Go to Work",
+    "goContact": "Go to Contact",
+    "toggleTheme": "Toggle theme",
+    "toggleLanguage": "Switch language (EN / AR)",
+    "downloadCV": "Download CV"
+  },
+  "a11y": {
+    "skipToContent": "Skip to content"
+  }
+}

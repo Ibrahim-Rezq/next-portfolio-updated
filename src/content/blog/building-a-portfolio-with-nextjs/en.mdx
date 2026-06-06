@@ -1,0 +1,53 @@
+---
+title: "Building a Portfolio with Next.js 16"
+date: "2026-05-20"
+excerpt: "How I designed and built this portfolio site — the design decisions, the tech stack, and what I'd do differently."
+tags: ["Next.js", "TypeScript", "Tailwind CSS"]
+published: true
+---
+
+Building a personal portfolio is one of those projects that's deceptively simple on paper and surprisingly nuanced in practice. Here's what I learned building this one.
+
+## Why Next.js 16
+
+The portfolio needed to be fast, SEO-friendly, and bilingual (English and Arabic). Next.js 16 with the App Router gave me server-side rendering out of the box, and the new `[locale]` segment routing with **next-intl** made the bilingual architecture clean to reason about.
+
+```tsx
+// Every page gets the locale from the URL: /en/ or /ar/
+export default async function LocaleLayout({ params }) {
+  const { locale } = await params;
+  return (
+    <html lang={locale} dir={locale === "ar" ? "rtl" : "ltr"}>
+      ...
+    </html>
+  );
+}
+```
+
+That one pattern — `<html lang dir>` set server-side — is the entire foundation of the bilingual SEO story. Google indexes `/en/` and `/ar/` as two distinct pages.
+
+## The design system
+
+I worked from a design handoff document that established a 60/30/10 color ratio:
+
+- **60% cream** (`#FEF8EC`) — background base
+- **30% deep teal** (`#134E52`) — structure and headings
+- **10% warm gold** (`#C4943F`) — accents and CTAs
+
+All of this lives in CSS custom properties in `globals.css`, exposed to Tailwind v4 via `@theme inline { ... }`. The result: classes like `text-text-heading` and `bg-gold-500` that mean something instead of raw hex values.
+
+## Islamic geometric motifs
+
+The geometric patterns — the eight-pointed star, the diamond lattice, the tessellation — are rendered as SVG and PNG in `public/patterns/`. They appear at 5–20% opacity to add warmth without visual noise.
+
+The hero pattern is an actual animated SVG that traces itself on load and responds to cursor movement. No canvas, just SVG paths and `requestAnimationFrame`.
+
+## What I'd do differently
+
+**Start with the design tokens first.** I rebuilt the CSS custom property layer twice because I hadn't fully committed to the semantic naming early enough. Going straight to `--text-heading` instead of `--teal-700` from day one would have saved a refactor.
+
+**Use next-intl from the beginning.** The site started with a client-side locale provider, which meant the server always rendered English HTML regardless of user preference — bad for SEO. Migrating to URL-based routing was the right call, but it was heavier work mid-build than it would have been at the start.
+
+---
+
+The full source is on [GitHub](https://github.com/Ibrahim-Rezq). Questions? Find me on the socials or send an email.

@@ -1,0 +1,55 @@
+---
+title: "Why I Chose Tailwind CSS v4 (and What's Different)"
+date: "2026-04-10"
+excerpt: "Tailwind v4 drops the config file entirely. Here's what that means in practice and why it made my workflow faster."
+tags: ["Tailwind CSS", "CSS", "DX"]
+published: true
+---
+
+Tailwind CSS v4 landed as a full rewrite, and the headline change is easy to miss: there's no `tailwind.config.ts` anymore. Configuration moves into your CSS file.
+
+Here's what that looks like in practice, and why it's actually a better mental model.
+
+## Everything in CSS
+
+In v3, you'd touch both `tailwind.config.ts` and `globals.css`. In v4, you only touch `globals.css`:
+
+```css
+@import "tailwindcss";
+
+@theme inline {
+  --color-brand: #134E52;
+  --color-gold: #C4943F;
+  --font-display: "Plus Jakarta Sans", system-ui, sans-serif;
+}
+```
+
+That `@theme inline { ... }` block is v4's way of saying "these CSS custom properties are design tokens — expose them as Tailwind utilities." The result: `text-brand`, `bg-gold`, `font-display` all just work.
+
+## No more `content` array
+
+In v3, misconfiguring the `content` array meant your classes got purged in production even though they looked fine in dev. In v4, the PostCSS plugin handles this automatically — it scans your project at build time. One less footgun.
+
+## Custom variants without plugins
+
+In v3, adding a custom variant required a plugin. In v4:
+
+```css
+@custom-variant dark (&:is(.dark *));
+```
+
+That one line gives you the `.dark` class variant for `next-themes`. No plugin needed.
+
+## When to not upgrade
+
+If you're mid-project with a v3 config that's working, don't migrate just for the sake of it. The benefit shows up most when:
+
+1. You're starting fresh
+2. Your design system has many tokens that v3 would put in `extend.colors`
+3. You want CSS variables to be the authoritative source for your design tokens
+
+For this portfolio, the brand system had ~30 custom tokens. In v3 that would have been a big `extend` block. In v4 it's just CSS variables that also happen to be Tailwind utilities — the exact same place I'd define them anyway.
+
+---
+
+The Tailwind v4 docs are good. Start there, and reach for the migration guide if you're upgrading.

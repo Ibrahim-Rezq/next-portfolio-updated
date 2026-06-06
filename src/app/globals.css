@@ -1,0 +1,450 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* ============================================================================
+   Ibrahim Amin — Brand tokens
+   Warm, handcrafted palette. 60% cream · 30% deep teal · 10% warm gold.
+   Ported from the Claude Design handoff (tokens/colors|spacing|typography|base).
+   ============================================================================ */
+:root {
+  /* --- Brand primaries (straight from the logo) --- */
+  --teal-900: #0c3437;
+  --teal-700: #134e52;
+  --teal-500: #1e6a6f;
+  --teal-300: #4e9095;
+
+  --gold-600: #a87a2e;
+  --gold-500: #c4943f;
+  --gold-300: #ddbe83;
+
+  --cream: #fef8ec;
+  --cream-200: #f7efdd;
+
+  --coral-500: #c4694e;
+  --coral-600: #a8553d;
+  --sage-500: #6b9b7a;
+  --sage-600: #588066;
+
+  --charcoal: #1a1f20;
+  --dark-surface: #2a3234;
+  --dark-elev: #36403f;
+  --warm-gray: #b0a898;
+  --light-gray: #e8e3db;
+  --white: #ffffff;
+
+  /* --- Semantic brand aliases (light theme) --- */
+  --bg-base: var(--cream);
+  --bg-alt: var(--cream-200);
+  --surface-card: var(--white);
+  --surface-sunken: var(--cream-200);
+  --text-strong: var(--charcoal);
+  --text-heading: var(--teal-700);
+  --text-muted: var(--warm-gray);
+  --text-on-teal: var(--cream);
+  --text-on-gold: var(--cream);
+  --brand-accent: var(--gold-500);
+  --brand-accent-strong: var(--gold-600);
+  --brand-border: var(--light-gray);
+  --brand-border-strong: var(--warm-gray);
+  --divider: var(--light-gray);
+  --link: var(--teal-700);
+  --link-hover: var(--gold-500);
+
+  /* --- Shadows (warm-tinted, soft — never harsh black) --- */
+  --shadow-xs: 0 1px 2px rgba(26, 31, 32, 0.05);
+  --shadow-sm: 0 2px 8px rgba(19, 78, 82, 0.06);
+  --shadow-md: 0 6px 20px rgba(19, 78, 82, 0.08);
+  --shadow-lg: 0 16px 40px rgba(19, 78, 82, 0.12);
+  --shadow-gold: 0 6px 20px rgba(196, 148, 63, 0.22);
+
+  /* --- Motion --- */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-soft: cubic-bezier(0.4, 0, 0.2, 1);
+  --dur-fast: 120ms;
+  --dur-base: 200ms;
+  --dur-slow: 320ms;
+
+  /* --- Islamic geometric pattern opacity --- */
+  --pattern-bg-opacity: 0.07;
+  --pattern-deco-opacity: 0.18;
+
+  /* --- Layout & type --- */
+  --container: 1120px;
+  --container-narrow: 760px;
+  --measure: 68ch;
+  --ls-tight: -0.02em;
+  --ls-label: 0.12em;
+
+  /* --- Font stacks (the --font-* vars are injected by next/font in layout.tsx) --- */
+  --font-display: var(--font-plus-jakarta), "Cairo", system-ui, sans-serif;
+  --font-body: var(--font-dm-sans), "Cairo", system-ui, sans-serif;
+  --font-mono-brand:
+    var(--font-jetbrains), ui-monospace, "SFMono-Regular", monospace;
+  --font-ar: var(--font-cairo), var(--font-plus-jakarta), system-ui, sans-serif;
+  --font-ar-soft: var(--font-tajawal), var(--font-cairo), system-ui, sans-serif;
+
+  /* ===== shadcn semantic tokens mapped to the brand (light) ===== */
+  --background: var(--cream);
+  --foreground: var(--charcoal);
+  --card: var(--white);
+  --card-foreground: var(--charcoal);
+  --popover: var(--white);
+  --popover-foreground: var(--charcoal);
+  --primary: var(--teal-700);
+  --primary-foreground: var(--cream);
+  --secondary: var(--cream-200);
+  --secondary-foreground: var(--teal-700);
+  --muted: var(--cream-200);
+  --muted-foreground: var(--warm-gray);
+  --accent: color-mix(in srgb, var(--gold-500) 14%, var(--cream));
+  --accent-foreground: var(--teal-700);
+  --destructive: var(--coral-600);
+  --border: var(--light-gray);
+  --input: var(--light-gray);
+  --ring: var(--teal-300);
+  --radius: 1rem;
+  --chart-1: var(--teal-700);
+  --chart-2: var(--gold-500);
+  --chart-3: var(--sage-500);
+  --chart-4: var(--coral-500);
+  --chart-5: var(--teal-300);
+  --sidebar: var(--cream);
+  --sidebar-foreground: var(--charcoal);
+  --sidebar-primary: var(--teal-700);
+  --sidebar-primary-foreground: var(--cream);
+  --sidebar-accent: var(--cream-200);
+  --sidebar-accent-foreground: var(--teal-700);
+  --sidebar-border: var(--light-gray);
+  --sidebar-ring: var(--teal-300);
+}
+
+/* ===== Dark theme — Charcoal canvas, cream ink. Teal headings become cream. ===== */
+.dark,
+[data-theme="dark"] {
+  --bg-base: var(--charcoal);
+  --bg-alt: #20272a;
+  --surface-card: var(--dark-surface);
+  --surface-sunken: #222a2b;
+  --text-strong: var(--cream);
+  --text-heading: var(--cream);
+  --text-muted: var(--warm-gray);
+  --text-on-teal: var(--cream);
+  --text-on-gold: var(--charcoal);
+  --brand-accent: var(--gold-500);
+  --brand-accent-strong: var(--gold-300);
+  --brand-border: var(--dark-elev);
+  --brand-border-strong: #47514f;
+  --divider: var(--dark-elev);
+  --link: var(--gold-500);
+  --link-hover: var(--gold-300);
+
+  --background: var(--charcoal);
+  --foreground: var(--cream);
+  --card: var(--dark-surface);
+  --card-foreground: var(--cream);
+  --popover: var(--dark-surface);
+  --popover-foreground: var(--cream);
+  --primary: var(--teal-500);
+  --primary-foreground: var(--cream);
+  --secondary: #20272a;
+  --secondary-foreground: var(--cream);
+  --muted: #20272a;
+  --muted-foreground: var(--warm-gray);
+  --accent: color-mix(in srgb, var(--gold-500) 18%, var(--dark-surface));
+  --accent-foreground: var(--gold-300);
+  --destructive: var(--coral-500);
+  --border: var(--dark-elev);
+  --input: var(--dark-elev);
+  --ring: var(--teal-500);
+  --sidebar: var(--charcoal);
+  --sidebar-foreground: var(--cream);
+  --sidebar-primary: var(--teal-500);
+  --sidebar-primary-foreground: var(--cream);
+  --sidebar-accent: #20272a;
+  --sidebar-accent-foreground: var(--cream);
+  --sidebar-border: var(--dark-elev);
+  --sidebar-ring: var(--teal-500);
+}
+
+/* ============================================================================
+   Tailwind theme — expose brand tokens as utilities (text-teal-700, bg-cream, …)
+   ============================================================================ */
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  /* Brand palette */
+  --color-teal-900: var(--teal-900);
+  --color-teal-700: var(--teal-700);
+  --color-teal-500: var(--teal-500);
+  --color-teal-300: var(--teal-300);
+  --color-gold-600: var(--gold-600);
+  --color-gold-500: var(--gold-500);
+  --color-gold-300: var(--gold-300);
+  --color-cream: var(--cream);
+  --color-cream-200: var(--cream-200);
+  --color-coral-500: var(--coral-500);
+  --color-coral-600: var(--coral-600);
+  --color-sage-500: var(--sage-500);
+  --color-sage-600: var(--sage-600);
+  --color-charcoal: var(--charcoal);
+  --color-dark-surface: var(--dark-surface);
+  --color-warm-gray: var(--warm-gray);
+  --color-light-gray: var(--light-gray);
+
+  /* Brand semantic */
+  --color-bg-base: var(--bg-base);
+  --color-bg-alt: var(--bg-alt);
+  --color-surface-card: var(--surface-card);
+  --color-surface-sunken: var(--surface-sunken);
+  --color-text-strong: var(--text-strong);
+  --color-text-heading: var(--text-heading);
+  --color-text-muted: var(--text-muted);
+  --color-on-teal: var(--text-on-teal);
+  --color-on-gold: var(--text-on-gold);
+  --color-brand-accent: var(--brand-accent);
+  --color-brand-accent-strong: var(--brand-accent-strong);
+  --color-brand-border: var(--brand-border);
+  --color-divider: var(--divider);
+
+  /* Fonts */
+  --font-sans: var(--font-body);
+  --font-body: var(--font-body);
+  --font-display: var(--font-display);
+  --font-heading: var(--font-display);
+  --font-mono: var(--font-mono-brand);
+
+  /* Layout */
+  --container-brand: 1120px;
+  --ease-out: var(--ease-out);
+  --ease-soft: var(--ease-soft);
+}
+
+/* ============================================================================
+   Base layer — element defaults (warm, handcrafted)
+   ============================================================================ */
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    @apply font-sans;
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+    line-height: 1.6;
+    text-rendering: optimizeLegibility;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-display);
+    color: var(--text-heading);
+    line-height: 1.2;
+    font-weight: 700;
+    text-wrap: balance;
+  }
+  h1 {
+    letter-spacing: var(--ls-tight);
+  }
+  ::selection {
+    background: var(--gold-300);
+    color: var(--charcoal);
+  }
+}
+
+/* ============================================================================
+   Brand utilities — eyebrow label + Islamic-geometric pattern helpers
+   Patterns SUPPORT, they don't dominate (5–10% bg, 15–20% deco).
+   ============================================================================ */
+.eyebrow {
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: var(--ls-label);
+  color: var(--brand-accent-strong);
+}
+
+.ia-pattern-bg {
+  position: relative;
+  isolation: isolate;
+}
+.ia-pattern-bg::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("/patterns/pattern-tessellation.svg");
+  background-size: 160px;
+  opacity: var(--pattern-bg-opacity);
+  pointer-events: none;
+  z-index: -1;
+}
+.ia-pattern-bg--teal::before {
+  background-image: url("/patterns/pattern-tessellation-teal.svg");
+}
+
+.ia-divider {
+  height: 16px;
+  background-image: url("/patterns/pattern-lattice.svg");
+  background-size: auto 16px;
+  background-repeat: repeat-x;
+  opacity: 0.5;
+  border: 0;
+}
+
+.ia-star-accent {
+  position: absolute;
+  top: 14px;
+  inset-inline-end: 14px;
+  width: 30px;
+  height: 30px;
+  background: url("/patterns/star-8.svg") center / contain no-repeat;
+  opacity: var(--pattern-deco-opacity);
+  pointer-events: none;
+}
+
+/* Readable prose column for the About page / future MDX */
+.brand-prose {
+  max-width: var(--measure);
+}
+.brand-prose p {
+  margin: 0 0 1rem;
+  line-height: 1.75;
+  color: var(--text-strong);
+}
+.brand-prose a {
+  color: var(--link);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: color-mix(in srgb, var(--gold-500) 50%, transparent);
+}
+.brand-prose a:hover {
+  color: var(--link-hover);
+}
+
+/* Blog post prose — extends brand aesthetic for long-form MDX content */
+.blog-prose {
+  max-width: var(--measure);
+}
+.blog-prose :is(h1, h2, h3) {
+  color: var(--text-heading);
+  font-weight: 700;
+  line-height: 1.25;
+  margin-top: 0;
+}
+.blog-prose h2 {
+  font-size: 1.4rem;
+  margin-top: 2.5rem;
+  border-bottom: 1px solid var(--divider);
+  padding-bottom: 0.4rem;
+}
+.blog-prose h3 {
+  font-size: 1.15rem;
+  margin-top: 2rem;
+}
+.blog-prose p {
+  line-height: 1.8;
+  color: var(--text-strong);
+  margin-top: 1.25rem;
+}
+.blog-prose a {
+  color: var(--teal-700);
+  text-underline-offset: 3px;
+  text-decoration: underline;
+}
+.blog-prose a:hover {
+  color: var(--gold-500);
+}
+.blog-prose blockquote {
+  border-inline-start: 3px solid var(--gold-500);
+  padding-inline-start: 1.25rem;
+  color: var(--text-muted);
+  font-style: italic;
+  margin: 1.5rem 0;
+}
+.blog-prose :not(pre) > code {
+  background: var(--surface-sunken);
+  border: 1px solid var(--brand-border);
+  border-radius: 4px;
+  padding: 0.15em 0.4em;
+  font-size: 0.875em;
+  font-family: var(--font-mono-brand);
+  color: var(--teal-500);
+}
+.blog-prose pre {
+  border-radius: 12px;
+  margin: 1.5rem 0;
+  font-size: 0.875rem;
+  overflow-x: auto;
+}
+/* rehype-pretty-code wraps pre in a figure */
+.blog-prose figure[data-rehype-pretty-code-figure] pre {
+  padding: 1.25rem 1.5rem;
+}
+.blog-prose ul,
+.blog-prose ol {
+  padding-inline-start: 1.5rem;
+  margin-top: 1rem;
+}
+.blog-prose li {
+  margin-top: 0.5rem;
+  line-height: 1.7;
+}
+.blog-prose img {
+  border-radius: 12px;
+  box-shadow: var(--shadow-md);
+  max-width: 100%;
+}
+.blog-prose hr {
+  border-color: var(--divider);
+  margin: 2.5rem 0;
+}
+
+/* Respect reduced-motion globally (framer-motion also gates per-component) */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
