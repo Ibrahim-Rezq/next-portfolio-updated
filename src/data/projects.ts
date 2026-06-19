@@ -18,8 +18,8 @@ export const projects: Project[] = [
     kind: { en: "Full-stack", ar: "متكامل" },
     tone: "gold",
     description: {
-      en: "A full-stack app for organizing quotes with multi-language support. Passwordless auth, Server Actions with Prisma ORM, dark/light mode, and English/Arabic support.",
-      ar: "تطبيق متكامل لتنظيم الاقتباسات مع دعم متعدّد اللغات. تسجيل دخول بدون كلمة مرور، وServer Actions مع Prisma، ووضع داكن/فاتح، ودعم العربية والإنجليزية.",
+      en: "A full-stack app for collecting and organizing quotes. Passwordless login, Server Actions with Prisma, dark and light themes, and full English/Arabic support.",
+      ar: "تطبيق متكامل لجمع الاقتباسات وتنظيمها. تسجيل دخول من غير باسوورد، وServer Actions مع Prisma، ومظهر فاتح وداكن، ودعم كامل للعربي والإنجليزي.",
     },
     tech: ["Next.js 14", "TypeScript", "PostgreSQL", "Prisma", "Tailwind CSS"],
     github: "https://github.com/Ibrahim-Rezq",
@@ -30,8 +30,8 @@ export const projects: Project[] = [
     kind: { en: "Web", ar: "ويب" },
     tone: "teal",
     description: {
-      en: "A personal site with an integrated blog. Minimal, clean, and built to showcase work.",
-      ar: "موقع شخصي مع مدوّنة مدمجة. بسيط ونظيف، ومبني لعرض الأعمال.",
+      en: "A personal site with a blog built in. Kept it minimal on purpose so the work is what stands out.",
+      ar: "موقع شخصي مع مدوّنة جواه. خليته بسيط عن قصد عشان الشغل هو اللي يبان.",
     },
     tech: ["TypeScript", "Next.js", "Contentful CMS"],
     github: "https://github.com/Ibrahim-Rezq",
@@ -42,8 +42,8 @@ export const projects: Project[] = [
     kind: { en: "Frontend", ar: "واجهة" },
     tone: "sage",
     description: {
-      en: "A team project leading the frontend of an e-commerce app. Focused on component structure, state management, and a clean shopping experience.",
-      ar: "مشروع جماعي قُدت فيه واجهة تطبيق تجارة إلكترونية. ركّزت على بنية المكوّنات وإدارة الحالة وتجربة تسوّق نظيفة.",
+      en: "A team project where I led the frontend of an e-commerce app. My part was the component structure and state management, plus keeping the shopping flow simple.",
+      ar: "مشروع جماعي قُدت فيه واجهة تطبيق تجارة إلكترونية. نصيبي كان بنية المكوّنات وإدارة الحالة، وإني أخلي تجربة الشرا بسيطة.",
     },
     tech: ["React", "JavaScript", "REST API"],
     github: "https://github.com/Ibrahim-Rezq",

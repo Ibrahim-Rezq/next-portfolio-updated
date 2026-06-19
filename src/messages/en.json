@@ -15,7 +15,7 @@
     "eyebrow": "Next.js & React Developer",
     "greeting": "Hi, I'm Ibrahim",
     "title": "I build web apps that actually work.",
-    "tagline": "Full-stack developer from Egypt. I care about clean code — but I care more about shipping something that solves the problem.",
+    "tagline": "Full-stack developer from Egypt. I like clean code, but I care more about shipping something that solves a real problem.",
     "viewWork": "View my work",
     "downloadCV": "Download CV"
   },
@@ -41,7 +41,7 @@
   "contact": {
     "eyebrow": "Say salam",
     "title": "Get in touch",
-    "message": "Have a project in mind, or just want to say hi? I'd love to hear from you.",
+    "message": "Got a project in mind, or just want to say salam? My inbox is open, and I actually reply.",
     "sendEmail": "Send email",
     "elsewhere": "Or find me elsewhere"
   },
@@ -49,8 +49,8 @@
     "eyebrow": "A little more",
     "title": "About me",
     "bio": [
-      "I build web apps with Next.js and React — that's where I do my best work. Over the past few years I've shipped production applications for clients, built internal tools and dashboards, and worked across the stack from component architecture to Express backends. I care about writing clean code, but I care more about shipping something that actually solves the problem.",
-      "I've done everything from converting Figma designs into pixel-perfect UIs to building data pipelines and student tracking systems. Currently focused on the React and Next.js ecosystem, and always looking for interesting problems to work on."
+      "I build web apps with Next.js and React, and that's where I do my best work. Over the past few years I've shipped production apps for clients and built internal tools and dashboards that people actually use every day. I work across the stack, from component architecture down to Express backends.",
+      "I've done a bit of everything, from turning Figma designs into pixel-perfect UIs to building data pipelines and a student tracking system. Right now I'm focused on the React and Next.js side of things, and always looking for interesting problems to work on."
     ],
     "educationTitle": "Education",
     "education": "Benha University — Bachelor's Degree, Nursing (2018–2022)",
@@ -70,7 +70,7 @@
     "minRead": "min read",
     "backToAll": "All posts",
     "noPosts": "No posts yet. Check back soon.",
-    "langFallback": "This post isn't available in your language — showing the original.",
+    "langFallback": "This post isn't available in your language yet, so here's the original.",
     "postedOn": "Posted on"
   },
   "footer": {
