@@ -1,10 +1,7 @@
-import fs from "fs";
-import path from "path";
-import matter from "gray-matter";
 import readingTime from "reading-time";
+import { put } from "@vercel/blob";
 import type { Locale } from "@/i18n/types";
-
-const CONTENT_DIR = path.join(process.cwd(), "src/content/blog");
+import { sql } from "@/lib/db";
 
 export interface PostMeta {
   slug: string;
@@ -13,98 +10,224 @@ export interface PostMeta {
   excerpt: string;
   tags: string[];
   readingTime: string;
-  published: boolean;
   availableLocales: Locale[];
+  lang: Locale;
+  coverImage?: string;
 }
 
 export interface Post extends PostMeta {
   content: string;
-  locale: Locale;
   isFallback: boolean;
 }
 
-const FALLBACK_ORDER: Record<Locale, Locale> = { en: "ar", ar: "en" };
-
-function getAvailableLocales(slug: string): Locale[] {
-  const dir = path.join(CONTENT_DIR, slug);
-  if (!fs.existsSync(dir)) return [];
-  return (["en", "ar"] as Locale[]).filter((l) =>
-    fs.existsSync(path.join(dir, `${l}.mdx`)),
-  );
+export interface PostRow {
+  slug: string;
+  lang: string;
+  title: string;
+  excerpt: string;
+  content: string;
+  tags: string[];
+  date: string;
+  cover_image: string | null;
 }
 
-function parseMeta(slug: string, locale: Locale): PostMeta | null {
-  const filePath = path.join(CONTENT_DIR, slug, `${locale}.mdx`);
-  if (!fs.existsSync(filePath)) return null;
-
-  const raw = fs.readFileSync(filePath, "utf-8");
-  const { data, content } = matter(raw);
-
-  if (!data.published) return null;
-
-  // gray-matter returns data as Record<string, unknown>.
-  // Shapes proven correct by the frontmatter schema documented in CLAUDE.md.
-  return {
-    slug,
-    title: data.title as string,
-    date: data.date as string,
-    excerpt: data.excerpt as string,
-    tags: (data.tags as string[]) ?? [],
-    readingTime: readingTime(content).text,
-    published: Boolean(data.published),
-    availableLocales: getAvailableLocales(slug),
-  };
-}
+// ─── Read functions (used by pages) ──────────────────────────────────────────
 
 export async function getAllPosts(locale: Locale): Promise<PostMeta[]> {
-  if (!fs.existsSync(CONTENT_DIR)) return [];
+  try {
+    const rows = (await sql`
+      SELECT slug, lang, title, excerpt, content, tags, date, cover_image
+      FROM posts
+      WHERE lang = ${locale}
+      ORDER BY date DESC
+    `) as PostRow[];
 
-  const slugs = fs
-    .readdirSync(CONTENT_DIR, { withFileTypes: true })
-    .filter((d) => d.isDirectory())
-    .map((d) => d.name);
-
-  return slugs
-    .map((slug) => parseMeta(slug, locale))
-    .filter((p): p is PostMeta => p !== null)
-    .sort((a, b) => (a.date < b.date ? 1 : -1));
+    return rows.map((row) => ({
+      slug: row.slug,
+      title: row.title,
+      date: String(row.date),
+      excerpt: row.excerpt,
+      tags: row.tags ?? [],
+      readingTime: readingTime(row.content).text,
+      // Listing query filters by one locale; cross-locale count not needed for the list view.
+      availableLocales: [row.lang as Locale],
+      lang: row.lang as Locale,
+      coverImage: row.cover_image ?? undefined,
+    }));
+  } catch (err) {
+    console.error("[blog.getAllPosts]", err);
+    return [];
+  }
 }
 
 export async function getPost(
   slug: string,
   locale: Locale,
 ): Promise<Post | null> {
-  const dir = path.join(CONTENT_DIR, slug);
-  if (!fs.existsSync(dir)) return null;
+  try {
+    const localeRows = (await sql`
+      SELECT lang FROM posts WHERE slug = ${slug} ORDER BY lang
+    `) as { lang: string }[];
 
-  let resolvedLocale = locale;
-  let isFallback = false;
+    if (localeRows.length === 0) return null;
 
-  let filePath = path.join(dir, `${locale}.mdx`);
-  if (!fs.existsSync(filePath)) {
-    const fallback = FALLBACK_ORDER[locale];
-    filePath = path.join(dir, `${fallback}.mdx`);
-    if (!fs.existsSync(filePath)) return null;
-    resolvedLocale = fallback;
-    isFallback = true;
+    const availableLocales = localeRows.map((r) => r.lang as Locale);
+
+    const exactRows = (await sql`
+      SELECT slug, lang, title, excerpt, content, tags, date, cover_image
+      FROM posts WHERE slug = ${slug} AND lang = ${locale}
+    `) as PostRow[];
+
+    let row: PostRow;
+    let isFallback = false;
+
+    if (exactRows.length > 0) {
+      row = exactRows[0];
+    } else {
+      const fallback = availableLocales[0];
+      const fallbackRows = (await sql`
+        SELECT slug, lang, title, excerpt, content, tags, date, cover_image
+        FROM posts WHERE slug = ${slug} AND lang = ${fallback}
+      `) as PostRow[];
+      if (fallbackRows.length === 0) return null;
+      row = fallbackRows[0];
+      isFallback = true;
+    }
+
+    return {
+      slug: row.slug,
+      title: row.title,
+      date: String(row.date),
+      excerpt: row.excerpt,
+      tags: row.tags ?? [],
+      readingTime: readingTime(row.content).text,
+      availableLocales,
+      lang: row.lang as Locale,
+      coverImage: row.cover_image ?? undefined,
+      content: row.content,
+      isFallback,
+    };
+  } catch (err) {
+    console.error("[blog.getPost] slug=%s locale=%s", slug, locale, err);
+    return null;
   }
+}
 
-  const raw = fs.readFileSync(filePath, "utf-8");
-  const { data, content } = matter(raw);
+// ─── Service functions (used by the content API routes) ──────────────────────
 
-  // gray-matter returns data as Record<string, unknown>.
-  // Shapes proven correct by the frontmatter schema documented in CLAUDE.md.
-  return {
+export async function listPosts(): Promise<
+  { slug: string; title: string; lang: Locale }[]
+> {
+  const rows = (await sql`
+    SELECT slug, title, lang FROM posts ORDER BY date DESC
+  `) as { slug: string; title: string; lang: string }[];
+  return rows.map((r) => ({ ...r, lang: r.lang as Locale }));
+}
+
+export interface CreatePostInput {
+  slug: string;
+  lang: Locale;
+  title: string;
+  excerpt: string;
+  tags: string[];
+  content: string;
+  date: string;
+  coverImage?: string;
+  coverImageMime?: string;
+}
+
+/** Returns `"conflict"` if (slug, lang) already exists, `"created"` on success. */
+export async function createPost(
+  input: CreatePostInput,
+): Promise<"created" | "conflict"> {
+  const {
     slug,
-    title: data.title as string,
-    date: data.date as string,
-    excerpt: data.excerpt as string,
-    tags: (data.tags as string[]) ?? [],
-    readingTime: readingTime(content).text,
-    published: Boolean(data.published),
-    availableLocales: getAvailableLocales(slug),
+    lang,
+    title,
+    excerpt,
+    tags,
     content,
-    locale: resolvedLocale,
-    isFallback,
-  };
+    date,
+    coverImage,
+    coverImageMime,
+  } = input;
+
+  const existing = (await sql`
+    SELECT id FROM posts WHERE slug = ${slug} AND lang = ${lang}
+  `) as { id: string }[];
+  if (existing.length > 0) return "conflict";
+
+  const coverImageUrl =
+    coverImage && coverImageMime
+      ? await uploadCover(slug, lang, coverImage, coverImageMime)
+      : null;
+
+  await sql`
+    INSERT INTO posts (slug, lang, title, excerpt, tags, content, date, cover_image)
+    VALUES (${slug}, ${lang}, ${title}, ${excerpt}, ${tags}, ${content}, ${date}, ${coverImageUrl})
+  `;
+
+  return "created";
+}
+
+export interface UpdatePostInput {
+  lang: Locale;
+  title?: string;
+  excerpt?: string;
+  tags?: string[];
+  content?: string;
+  date?: string;
+  coverImage?: string;
+  coverImageMime?: string;
+}
+
+/** Returns `"not_found"` if (slug, lang) does not exist, `"updated"` on success. */
+export async function updatePost(
+  slug: string,
+  input: UpdatePostInput,
+): Promise<"updated" | "not_found"> {
+  const { lang, coverImage, coverImageMime } = input;
+
+  const rows = (await sql`
+    SELECT slug, lang, title, excerpt, content, tags, date, cover_image
+    FROM posts WHERE slug = ${slug} AND lang = ${lang}
+  `) as PostRow[];
+  if (rows.length === 0) return "not_found";
+
+  const current = rows[0];
+
+  const coverImageUrl =
+    coverImage && coverImageMime
+      ? await uploadCover(slug, lang, coverImage, coverImageMime)
+      : current.cover_image;
+
+  await sql`
+    UPDATE posts SET
+      title       = ${input.title ?? current.title},
+      excerpt     = ${input.excerpt ?? current.excerpt},
+      tags        = ${input.tags ?? current.tags},
+      content     = ${input.content ?? current.content},
+      date        = ${input.date ?? current.date},
+      cover_image = ${coverImageUrl},
+      updated_at  = now()
+    WHERE slug = ${slug} AND lang = ${lang}
+  `;
+
+  return "updated";
+}
+
+// ─── Private helpers ─────────────────────────────────────────────────────────
+
+async function uploadCover(
+  slug: string,
+  lang: Locale,
+  base64: string,
+  mime: string,
+): Promise<string> {
+  const buffer = Buffer.from(base64, "base64");
+  const ext = mime.split("/")[1] || "bin";
+  const { url } = await put(`covers/${slug}-${lang}.${ext}`, buffer, {
+    access: "public",
+  });
+  return url;
 }

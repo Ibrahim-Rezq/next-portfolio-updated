@@ -6,7 +6,7 @@ import remarkGfm from "remark-gfm";
 import rehypeSlug from "rehype-slug";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypePrettyCode from "rehype-pretty-code";
-import { getAllPosts, getPost } from "@/lib/blog";
+import { getPost } from "@/lib/blog";
 import { PostHeader } from "@/components/blog/PostHeader";
 import { LangFallbackBanner } from "@/components/blog/LangFallbackBanner";
 import { mdxComponents } from "@/components/blog/MDXComponents";
@@ -29,15 +29,6 @@ const mdxOptions = {
     ] as Pluggable[],
   },
 };
-
-export async function generateStaticParams({
-  params,
-}: {
-  params: { locale: string };
-}) {
-  const posts = await getAllPosts(params.locale as Locale);
-  return posts.map((p) => ({ slug: p.slug }));
-}
 
 export async function generateMetadata({
   params,
