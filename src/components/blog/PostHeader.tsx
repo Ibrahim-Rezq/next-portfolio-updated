@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { Clock } from "lucide-react";
 import { useTranslations, useLocale } from "next-intl";
 import { Link } from "@/i18n/navigation";
@@ -70,6 +71,19 @@ export function PostHeader({ post }: { post: Post }) {
           </div>
         )}
       </div>
+
+      {post.coverImage && (
+        <div className="relative mt-8 aspect-video w-full overflow-hidden rounded-lg">
+          <Image
+            src={post.coverImage}
+            alt={post.title}
+            fill
+            priority
+            className="object-cover"
+            sizes="(min-width: 768px) 720px, 100vw"
+          />
+        </div>
+      )}
     </header>
   );
 }
