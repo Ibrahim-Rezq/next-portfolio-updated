@@ -49,8 +49,8 @@
     "eyebrow": "A little more",
     "title": "About me",
     "bio": [
-      "I build web apps with Next.js and React, and that's where I do my best work. Over the past few years I've shipped production apps for clients and built internal tools and dashboards that people actually use every day. I work across the stack, from component architecture down to Express backends.",
-      "I've done a bit of everything, from turning Figma designs into pixel-perfect UIs to building data pipelines and a student tracking system. Right now I'm focused on the React and Next.js side of things, and always looking for interesting problems to work on."
+      "I build web apps with Next.js and React. That's most of what I do. Over the past few years I've shipped production apps for clients and built internal tools and dashboards that people actually use every day. I work across the stack, from component architecture down to Express backends.",
+      "I've done a bit of everything, from turning Figma designs into pixel-perfect UIs to building data pipelines and a student tracking system. Right now I'm focused on the React and Next.js side of things. If you have something worth building, I'm probably interested."
     ],
     "educationTitle": "Education",
     "education": "Benha University — Bachelor's Degree, Nursing (2018–2022)",

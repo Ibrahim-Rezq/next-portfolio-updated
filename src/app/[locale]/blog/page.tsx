@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { getAllPosts } from "@/lib/blog";
+import { SITE_URL } from "@/lib/siteConfig";
 import { SectionHeading } from "@/components/shared/SectionHeading";
 import {
   AnimatedSection,
@@ -16,9 +17,22 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "blog" });
+  const description =
+    locale === "ar"
+      ? "مقالات عن Next.js و React وتطوير الويب."
+      : "Writing about Next.js, React, and building for the web.";
+
   return {
     title: t("title"),
-    description: "Writing about Next.js, React, and the web.",
+    description,
+    alternates: {
+      canonical: `${SITE_URL}/${locale}/blog`,
+      languages: {
+        en: `${SITE_URL}/en/blog`,
+        ar: `${SITE_URL}/ar/blog`,
+        "x-default": `${SITE_URL}/en/blog`,
+      },
+    },
   };
 }
 

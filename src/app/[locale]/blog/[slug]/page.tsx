@@ -7,6 +7,7 @@ import rehypeSlug from "rehype-slug";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypePrettyCode from "rehype-pretty-code";
 import { getPost } from "@/lib/blog";
+import { SITE_URL } from "@/lib/siteConfig";
 import { PostHeader } from "@/components/blog/PostHeader";
 import { LangFallbackBanner } from "@/components/blog/LangFallbackBanner";
 import { mdxComponents } from "@/components/blog/MDXComponents";
@@ -38,9 +39,26 @@ export async function generateMetadata({
   const { locale, slug } = await params;
   const post = await getPost(slug, locale as Locale);
   if (!post) return {};
+
   return {
     title: post.title,
     description: post.excerpt,
+    alternates: {
+      canonical: `${SITE_URL}/${locale}/blog/${slug}`,
+      languages: {
+        en: `${SITE_URL}/en/blog/${slug}`,
+        ar: `${SITE_URL}/ar/blog/${slug}`,
+        "x-default": `${SITE_URL}/en/blog/${slug}`,
+      },
+    },
+    openGraph: {
+      type: "article",
+      title: post.title,
+      description: post.excerpt,
+      url: `${SITE_URL}/${locale}/blog/${slug}`,
+      publishedTime: post.date,
+      locale: locale === "ar" ? "ar_EG" : "en_US",
+    },
   };
 }
 

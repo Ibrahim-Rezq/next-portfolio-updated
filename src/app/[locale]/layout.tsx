@@ -1,11 +1,12 @@
 import type { Metadata, Viewport } from "next";
 import { notFound } from "next/navigation";
-import { Analytics } from "@vercel/analytics/next";
+// import { Analytics } from "@vercel/analytics/next";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { getMessages, getTranslations } from "next-intl/server";
 import { routing } from "@/i18n/routing";
 import { dirFor, type Locale } from "@/i18n/types";
 import { fontVariables } from "@/lib/fonts";
+import { SITE_URL } from "@/lib/siteConfig";
 import { Providers } from "@/providers/providers";
 import { SkipLink } from "@/components/shared/SkipLink";
 import { Navbar } from "@/components/layout/Navbar";
@@ -14,13 +15,31 @@ import { CommandPalette } from "@/components/layout/CommandPalette";
 import { LocaleTransition } from "@/components/shared/LocaleTransition";
 import "../globals.css";
 
-const siteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://ibrahim-rezq.vercel.app";
+const personJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Ibrahim Amin",
+  url: SITE_URL,
+  jobTitle: "Full-Stack Developer",
+  knowsAbout: ["Next.js", "React", "TypeScript", "Node.js", "Express"],
+  nationality: { "@type": "Country", name: "Egypt" },
+  sameAs: [
+    "https://github.com/Ibrahim-Rezq",
+    "https://linkedin.com/in/ibrahimamin391",
+  ],
+};
 
-export async function generateMetadata(): Promise<Metadata> {
-  const t = await getTranslations("hero");
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "hero" });
+  const localeUrl = `${SITE_URL}/${locale}`;
+
   return {
-    metadataBase: new URL(siteUrl),
+    metadataBase: new URL(SITE_URL),
     title: {
       default: "Ibrahim Amin — Next.js & React Developer",
       template: "%s | Ibrahim Amin",
@@ -35,7 +54,20 @@ export async function generateMetadata(): Promise<Metadata> {
       "React developer",
       "full-stack developer",
       "Egypt",
+      "إبراهيم أمين",
+      "مطوّر Next.js",
+      "مطوّر React",
+      "تطوير ويب",
+      "مصر",
     ],
+    alternates: {
+      canonical: localeUrl,
+      languages: {
+        en: `${SITE_URL}/en`,
+        ar: `${SITE_URL}/ar`,
+        "x-default": `${SITE_URL}/en`,
+      },
+    },
     icons: {
       icon: [
         { url: "/favicon.ico", sizes: "any" },
@@ -46,11 +78,12 @@ export async function generateMetadata(): Promise<Metadata> {
     },
     openGraph: {
       type: "website",
-      url: siteUrl,
+      url: localeUrl,
       siteName: "Ibrahim Amin",
       title: "Ibrahim Amin — Next.js & React Developer",
       description:
         "I build web apps with Next.js and React. Full-stack developer based in Egypt, focused on clean code and solving real problems.",
+      locale: locale === "ar" ? "ar_EG" : "en_US",
     },
     twitter: {
       card: "summary_large_image",
@@ -91,6 +124,10 @@ export default async function LocaleLayout({
       className={`${fontVariables} h-full`}
     >
       <body className="flex min-h-full flex-col">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
+        />
         <NextIntlClientProvider messages={messages}>
           <Providers>
             <SkipLink />
@@ -102,7 +139,6 @@ export default async function LocaleLayout({
             <CommandPalette />
           </Providers>
         </NextIntlClientProvider>
-        <Analytics />
       </body>
     </html>
   );
