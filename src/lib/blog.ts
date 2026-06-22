@@ -3,6 +3,16 @@ import { put } from "@vercel/blob";
 import type { Locale } from "@/i18n/types";
 import { sql } from "@/lib/db";
 
+const COVER_BLOB_PREFIX = "covers";
+const ALLOWED_IMAGE_EXTS = new Set([
+  "jpeg",
+  "jpg",
+  "png",
+  "webp",
+  "gif",
+  "avif",
+]);
+
 export interface PostMeta {
   slug: string;
   title: string;
@@ -157,10 +167,18 @@ export async function createPost(
   `) as { id: string }[];
   if (existing.length > 0) return "conflict";
 
-  const coverImageUrl =
-    coverImage && coverImageMime
-      ? await uploadCover(slug, lang, coverImage, coverImageMime)
-      : null;
+  let coverImageUrl: string | null;
+  if (coverImage && coverImageMime) {
+    coverImageUrl = await uploadCover(slug, coverImage, coverImageMime);
+    // Propagate to any sibling rows (same slug, different lang) that may already exist
+    await sql`UPDATE posts SET cover_image = ${coverImageUrl} WHERE slug = ${slug}`;
+  } else {
+    // Inherit from a sibling that already has a cover
+    const sibling = (await sql`
+      SELECT cover_image FROM posts WHERE slug = ${slug} AND cover_image IS NOT NULL LIMIT 1
+    `) as { cover_image: string }[];
+    coverImageUrl = sibling[0]?.cover_image ?? null;
+  }
 
   await sql`
     INSERT INTO posts (slug, lang, title, excerpt, tags, content, date, cover_image)
@@ -196,10 +214,14 @@ export async function updatePost(
 
   const current = rows[0];
 
-  const coverImageUrl =
-    coverImage && coverImageMime
-      ? await uploadCover(slug, lang, coverImage, coverImageMime)
-      : current.cover_image;
+  let coverImageUrl: string | null;
+  if (coverImage && coverImageMime) {
+    coverImageUrl = await uploadCover(slug, coverImage, coverImageMime);
+    // Propagate updated cover to all sibling rows
+    await sql`UPDATE posts SET cover_image = ${coverImageUrl} WHERE slug = ${slug} AND lang != ${lang}`;
+  } else {
+    coverImageUrl = current.cover_image;
+  }
 
   await sql`
     UPDATE posts SET
@@ -220,14 +242,17 @@ export async function updatePost(
 
 async function uploadCover(
   slug: string,
-  lang: Locale,
   base64: string,
   mime: string,
 ): Promise<string> {
+  const ext = mime.split("/")[1];
+  if (!ext || !ALLOWED_IMAGE_EXTS.has(ext)) {
+    throw new Error(`Unsupported image MIME type: ${mime}`);
+  }
   const buffer = Buffer.from(base64, "base64");
-  const ext = mime.split("/")[1] || "bin";
-  const { url } = await put(`covers/${slug}-${lang}.${ext}`, buffer, {
+  const { url } = await put(`${COVER_BLOB_PREFIX}/${slug}.${ext}`, buffer, {
     access: "public",
+    allowOverwrite: true,
   });
   return url;
 }
