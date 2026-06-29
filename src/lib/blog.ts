@@ -2,6 +2,7 @@ import readingTime from "reading-time";
 import { put } from "@vercel/blob";
 import type { Locale } from "@/i18n/types";
 import { sql } from "@/lib/db";
+import { Logger } from "@/lib/logger";
 
 const COVER_BLOB_PREFIX = "covers";
 const ALLOWED_IMAGE_EXTS = new Set([
@@ -65,7 +66,7 @@ export async function getAllPosts(locale: Locale): Promise<PostMeta[]> {
       coverImage: row.cover_image ?? undefined,
     }));
   } catch (err) {
-    console.error("[blog.getAllPosts]", err);
+    Logger.error("[blog.getAllPosts]", err);
     return [];
   }
 }
@@ -118,7 +119,7 @@ export async function getPost(
       isFallback,
     };
   } catch (err) {
-    console.error("[blog.getPost] slug=%s locale=%s", slug, locale, err);
+    Logger.error("[blog.getPost] slug=%s locale=%s", slug, locale, err);
     return null;
   }
 }

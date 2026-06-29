@@ -47,8 +47,8 @@ export function About() {
           </motion.div>
 
           <motion.div variants={fadeInUp} className="brand-prose mt-8">
-            {(t.raw("bio") as string[]).map((para, i) => (
-              <p key={i}>{para}</p>
+            {(t.raw("bio") as string[]).map((para) => (
+              <p key={para}>{para}</p>
             ))}
           </motion.div>
         </motion.div>

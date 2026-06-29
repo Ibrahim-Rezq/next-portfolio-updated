@@ -1,6 +1,5 @@
 import type { Metadata, Viewport } from "next";
 import { notFound } from "next/navigation";
-// import { Analytics } from "@vercel/analytics/next";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { getMessages, getTranslations } from "next-intl/server";
 import { routing } from "@/i18n/routing";
@@ -20,7 +19,7 @@ const personJsonLd = {
   "@type": "Person",
   name: "Ibrahim Amin",
   url: SITE_URL,
-  jobTitle: "Full-Stack Developer",
+  jobTitle: "Next.js & React Developer",
   knowsAbout: ["Next.js", "React", "TypeScript", "Node.js", "Express"],
   nationality: { "@type": "Country", name: "Egypt" },
   sameAs: [
@@ -82,14 +81,14 @@ export async function generateMetadata({
       siteName: "Ibrahim Amin",
       title: "Ibrahim Amin — Next.js & React Developer",
       description:
-        "I build web apps with Next.js and React. Full-stack developer based in Egypt, focused on clean code and solving real problems.",
+        "I build Next.js dashboards and internal tools for teams. Full-stack, bilingual Arabic and English. Based in Egypt.",
       locale: locale === "ar" ? "ar_EG" : "en_US",
     },
     twitter: {
       card: "summary_large_image",
       title: "Ibrahim Amin — Next.js & React Developer",
       description:
-        "I build web apps with Next.js and React. Full-stack developer based in Egypt, focused on clean code and solving real problems.",
+        "I build Next.js dashboards and internal tools for teams. Full-stack, bilingual Arabic and English. Based in Egypt.",
     },
   };
 }
@@ -126,7 +125,9 @@ export default async function LocaleLayout({
       <body className="flex min-h-full flex-col">
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(personJsonLd).replace(/</g, "\\u003c"),
+          }}
         />
         <NextIntlClientProvider messages={messages}>
           <Providers>

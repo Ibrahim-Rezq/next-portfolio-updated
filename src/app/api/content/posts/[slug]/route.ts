@@ -3,6 +3,7 @@ import { revalidatePath } from "next/cache";
 import { isAuthenticated } from "@/lib/contentAuth";
 import { updatePost, type UpdatePostInput } from "@/lib/blog";
 import { LOCALES, type Locale } from "@/i18n/types";
+import { Logger } from "@/lib/logger";
 
 export async function PATCH(
   request: NextRequest,
@@ -46,12 +47,13 @@ export async function PATCH(
       return NextResponse.json({ error: "Post not found" }, { status: 404 });
     }
     for (const loc of LOCALES) {
+      revalidatePath(`/${loc}`);
       revalidatePath(`/${loc}/blog`);
       revalidatePath(`/${loc}/blog/${slug}`);
     }
     return NextResponse.json({ success: true });
   } catch (err) {
-    console.error("[PATCH /api/content/posts/%s]", slug, err);
+    Logger.error("[PATCH /api/content/posts/%s]", slug, err);
     return NextResponse.json(
       { error: "Internal server error" },
       { status: 500 },

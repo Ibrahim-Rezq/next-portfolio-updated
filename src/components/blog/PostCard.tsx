@@ -6,6 +6,7 @@ import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { Tag } from "@/components/shared/Tag";
 import { StarDecoration } from "@/components/patterns/StarDecoration";
+import { formatPostDate } from "@/lib/utils";
 import type { PostMeta } from "@/lib/blog";
 import type { Locale } from "@/i18n/types";
 
@@ -17,10 +18,7 @@ interface PostCardProps {
 export function PostCard({ post, locale }: PostCardProps) {
   const t = useTranslations("blog");
 
-  const formattedDate = new Intl.DateTimeFormat(
-    locale === "ar" ? "ar-EG" : "en-US",
-    { year: "numeric", month: "long", day: "numeric" },
-  ).format(new Date(post.date));
+  const formattedDate = formatPostDate(post.date, locale);
 
   return (
     <Link

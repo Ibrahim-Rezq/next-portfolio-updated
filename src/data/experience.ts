@@ -37,8 +37,8 @@ export const experience: ExperienceEntry[] = [
     company: { en: "Upwork", ar: "Upwork" },
     period: { en: "Apr 2022 – Present", ar: "أبريل 2022 – حتى الآن" },
     description: {
-      en: "Convert PSD designs into responsive interfaces with live API integration. Integrate JavaScript libraries into Next.js projects, keeping the code modular and clean so the next developer can pick it up easily.",
-      ar: "أحوّل تصاميم PSD إلى واجهات متجاوبة مع ربط مباشر بالـ API. وأدمج مكتبات JavaScript في مشاريع Next.js، وأحرص أن يبقى الكود معيارياً ونظيفاً عشان المطوّر اللي بعدي يقدر يكمّل بسهولة.",
+      en: "I build dashboards, internal tools, and web apps for clients in the Next.js and React ecosystem. Some projects are purely frontend, converting designs into clean responsive UIs. Others are full builds where I handle the backend too. Either way the goal is the same: ship something solid that does the job.",
+      ar: "ببني لوحات تحكم وأدوات داخلية وتطبيقات ويب للعملاء في بيئة Next.js وReact. في مشاريع frontend بحتة بحوّل فيها التصاميم لواجهات نظيفة ومتجاوبة. وفي مشاريع كاملة باتكفّل فيها بالخلفية كمان. في الحالتين الهدف واحد: أطلّع حاجة متينة بتعمل اللي المفروض تعمله.",
     },
     tech: ["React", "Next.js", "JavaScript", "HTML/CSS"],
   },

@@ -1,10 +1,18 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import { motion } from "framer-motion";
 import { ArrowRight, Download, Sparkle } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { LivingGeometry } from "@/components/patterns/LivingGeometry";
 import { useTranslations } from "next-intl";
+
+const LivingGeometry = dynamic(
+  () =>
+    import("@/components/patterns/LivingGeometry").then(
+      (m) => m.LivingGeometry,
+    ),
+  { ssr: false, loading: () => null },
+);
 import { fadeInUp, staggerContainer } from "@/lib/animations";
 import { CV_PATH } from "@/data/socials";
 
@@ -81,11 +89,12 @@ export function Hero() {
               tStats.raw("stats") as Array<{ value: string; label: string }>
             ).map((s) => (
               <div key={s.label}>
-                <dt className="sr-only">{s.label}</dt>
                 <dd className="font-display text-3xl font-extrabold text-text-heading">
                   {s.value}
                 </dd>
-                <p className="mt-0.5 text-[13px] text-text-muted">{s.label}</p>
+                <dt className="mt-0.5 text-[13px] text-text-muted">
+                  {s.label}
+                </dt>
               </div>
             ))}
           </motion.dl>

@@ -3,6 +3,7 @@ import { revalidatePath } from "next/cache";
 import { isAuthenticated } from "@/lib/contentAuth";
 import { listPosts, createPost, type CreatePostInput } from "@/lib/blog";
 import { LOCALES, type Locale } from "@/i18n/types";
+import { Logger } from "@/lib/logger";
 
 export async function GET(request: NextRequest) {
   if (!isAuthenticated(request)) {
@@ -13,7 +14,7 @@ export async function GET(request: NextRequest) {
     const posts = await listPosts();
     return NextResponse.json({ posts });
   } catch (err) {
-    console.error("[GET /api/content/posts]", err);
+    Logger.error("[GET /api/content/posts]", err);
     return NextResponse.json(
       { error: "Internal server error" },
       { status: 500 },
@@ -71,6 +72,7 @@ export async function POST(request: NextRequest) {
       );
     }
     for (const loc of LOCALES) {
+      revalidatePath(`/${loc}`);
       revalidatePath(`/${loc}/blog`);
       revalidatePath(`/${loc}/blog/${input.slug}`);
     }
@@ -79,7 +81,7 @@ export async function POST(request: NextRequest) {
       { status: 201 },
     );
   } catch (err) {
-    console.error("[POST /api/content/posts]", err);
+    Logger.error("[POST /api/content/posts]", err);
     return NextResponse.json(
       { error: "Internal server error" },
       { status: 500 },

@@ -1,20 +1,14 @@
 "use client";
 
 import { useLocale, useTranslations } from "next-intl";
-import { usePathname, useRouter } from "@/i18n/navigation";
 import { Button } from "@/components/ui/button";
+import { useLocaleToggle } from "@/hooks/useLocaleToggle";
 import type { Locale } from "@/i18n/types";
 
 export function LocaleToggle() {
   const locale = useLocale() as Locale;
   const t = useTranslations("nav");
-  const router = useRouter();
-  const pathname = usePathname();
-
-  const toggle = () => {
-    const next: Locale = locale === "en" ? "ar" : "en";
-    router.replace(pathname, { locale: next });
-  };
+  const toggle = useLocaleToggle();
 
   return (
     <Button

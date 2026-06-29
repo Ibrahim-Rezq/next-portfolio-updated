@@ -5,7 +5,7 @@ import { Clock } from "lucide-react";
 import { useTranslations, useLocale } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { Badge } from "@/components/ui/badge";
-import { cn } from "@/lib/utils";
+import { cn, formatPostDate } from "@/lib/utils";
 import type { Post } from "@/lib/blog";
 import { LOCALES, type Locale } from "@/i18n/types";
 
@@ -15,10 +15,7 @@ export function PostHeader({ post }: { post: Post }) {
   const t = useTranslations("blog");
   const locale = useLocale() as Locale;
 
-  const formattedDate = new Intl.DateTimeFormat(
-    locale === "ar" ? "ar-EG" : "en-US",
-    { year: "numeric", month: "long", day: "numeric" },
-  ).format(new Date(post.date));
+  const formattedDate = formatPostDate(post.date, locale);
 
   return (
     <header className="mx-auto max-w-[var(--measure)] px-5 pt-16 pb-8 sm:px-7 md:pt-24">

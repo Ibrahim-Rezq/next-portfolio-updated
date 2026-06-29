@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useTheme } from "next-themes";
-import { useLocale, useTranslations } from "next-intl";
+import { useTranslations } from "next-intl";
 import {
   BookOpen,
   Download,
@@ -22,9 +22,9 @@ import {
   CommandList,
   CommandSeparator,
 } from "@/components/ui/command";
-import { usePathname, useRouter } from "@/i18n/navigation";
-import { type Locale } from "@/i18n/types";
+import { useRouter } from "@/i18n/navigation";
 import { CV_PATH, socials } from "@/data/socials";
+import { useLocaleToggle } from "@/hooks/useLocaleToggle";
 
 /** Open the palette from anywhere: window.dispatchEvent(new Event("ia:command")). */
 export const OPEN_COMMAND_EVENT = "ia:command";
@@ -32,16 +32,10 @@ export const OPEN_COMMAND_EVENT = "ia:command";
 export function CommandPalette() {
   const [open, setOpen] = useState(false);
   const router = useRouter();
-  const pathname = usePathname();
   const { setTheme, resolvedTheme } = useTheme();
-  const locale = useLocale() as Locale;
   const t = useTranslations("command");
   const tNav = useTranslations("nav");
-
-  const toggleLocale = () => {
-    const next: Locale = locale === "en" ? "ar" : "en";
-    router.replace(pathname, { locale: next });
-  };
+  const toggleLocale = useLocaleToggle();
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {

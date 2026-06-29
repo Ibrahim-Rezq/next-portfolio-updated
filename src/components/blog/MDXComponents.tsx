@@ -1,3 +1,4 @@
+import Image from "next/image";
 import type {
   AnchorHTMLAttributes,
   HTMLAttributes,
@@ -50,15 +51,20 @@ export const mdxComponents = {
       {children}
     </blockquote>
   ),
-  img: ({ src, alt, ...props }: ImgHTMLAttributes<HTMLImageElement>) => (
-    // eslint-disable-next-line @next/next/no-img-element
-    <img
-      src={src}
-      alt={alt ?? ""}
-      className="my-6 max-w-full rounded-xl shadow-[var(--shadow-md)]"
-      {...props}
-    />
-  ),
+  img: ({ src, alt, width, height }: ImgHTMLAttributes<HTMLImageElement>) => {
+    if (!src) return null;
+    return (
+      <Image
+        src={src as string}
+        alt={alt ?? ""}
+        width={typeof width === "number" ? width : 720}
+        height={typeof height === "number" ? height : 450}
+        className="my-6 rounded-xl shadow-[var(--shadow-md)]"
+        sizes="(min-width: 768px) 720px, 100vw"
+        style={{ width: "100%", height: "auto" }}
+      />
+    );
+  },
   hr: (props: HTMLAttributes<HTMLHRElement>) => (
     <hr className="my-10 border-divider" {...props} />
   ),

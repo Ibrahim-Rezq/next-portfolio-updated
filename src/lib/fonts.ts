@@ -11,6 +11,7 @@ export const plusJakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-plus-jakarta",
+  weight: ["400", "600", "700", "800"],
 });
 
 /** Body — DM Sans (clean, friendly). */
@@ -18,6 +19,7 @@ export const dmSans = DM_Sans({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-dm-sans",
+  weight: ["400", "500", "700"],
 });
 
 /** Code & mono UI accents — JetBrains Mono. */
@@ -25,6 +27,7 @@ export const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-jetbrains",
+  weight: ["400", "500"],
 });
 
 /** Arabic headings + body — Cairo (geometric, pairs with Jakarta). */
@@ -32,6 +35,7 @@ export const cairo = Cairo({
   subsets: ["arabic", "latin"],
   display: "swap",
   variable: "--font-cairo",
+  weight: ["400", "600", "700", "800"],
 });
 
 /** Arabic soft alternative — Tajawal. */

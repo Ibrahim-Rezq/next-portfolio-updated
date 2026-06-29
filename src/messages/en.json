@@ -12,10 +12,10 @@
     "commandHint": "Search"
   },
   "hero": {
-    "eyebrow": "Next.js & React Developer",
+    "eyebrow": "Next.js Developer — Dashboards & Internal Tools",
     "greeting": "Hi, I'm Ibrahim",
-    "title": "I build web apps that actually work.",
-    "tagline": "Full-stack developer from Egypt. I like clean code, but I care more about shipping something that solves a real problem.",
+    "title": "I build dashboards and internal tools teams actually use.",
+    "tagline": "Full-stack developer from Egypt. One person, from database to screen, in Arabic and English.",
     "viewWork": "View my work",
     "downloadCV": "Download CV"
   },
@@ -24,6 +24,22 @@
     { "value": "12+", "label": "Projects built" },
     { "value": "EN · AR", "label": "Bilingual" }
   ],
+  "services": {
+    "eyebrow": "What I build",
+    "title": "Services",
+    "card1": {
+      "title": "Admin Dashboard",
+      "desc": "A clean Next.js panel with auth, data tables, and CRUD. Fixed scope, one person, shipped."
+    },
+    "card2": {
+      "title": "Internal Tool",
+      "desc": "Scrapers, import/export pipelines, reporting tools. If your team does something manually that a script could handle, that's the gig."
+    },
+    "card3": {
+      "title": "Bilingual Web App",
+      "desc": "A Next.js app in Arabic and English, with RTL done right from the start — not as an afterthought."
+    }
+  },
   "experience": {
     "eyebrow": "Where I've worked",
     "title": "Experience"
@@ -49,8 +65,9 @@
     "eyebrow": "A little more",
     "title": "About me",
     "bio": [
-      "I build web apps with Next.js and React. That's most of what I do. Over the past few years I've shipped production apps for clients and built internal tools and dashboards that people actually use every day. I work across the stack, from component architecture down to Express backends.",
-      "I've done a bit of everything, from turning Figma designs into pixel-perfect UIs to building data pipelines and a student tracking system. Right now I'm focused on the React and Next.js side of things. If you have something worth building, I'm probably interested."
+      "I build web apps with Next.js and React, and the part I'm best at is internal tools. The dashboards and admin panels teams open every day to get their work done.",
+      "Here's what I mean by that. I built a student progress tracking platform for an education program: a Telegram scraper that pulls in assignment data automatically, an Excel tool that handles the weekly reports, and one dashboard where supervisors see all of it in one place. It's been running in production for a while and people use it every day.",
+      "I work full-stack, so you're getting one person who handles everything from the database all the way to the screen. And one thing that's a bit rare: I build in both Arabic and English. Real RTL, properly bilingual, not bolted on at the end."
     ],
     "educationTitle": "Education",
     "education": "Benha University — Bachelor's Degree, Nursing (2018–2022)",
@@ -72,6 +89,11 @@
     "noPosts": "No posts yet. Check back soon.",
     "langFallback": "This post isn't available in your language yet, so here's the original.",
     "postedOn": "Posted on"
+  },
+  "latestPosts": {
+    "eyebrow": "From the blog",
+    "title": "Latest Writing",
+    "viewAll": "View all posts"
   },
   "footer": {
     "tagline": "Built with care in Egypt.",

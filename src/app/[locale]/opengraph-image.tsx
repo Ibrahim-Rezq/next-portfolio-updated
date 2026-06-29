@@ -39,10 +39,10 @@ export default function OpengraphImage() {
           maxWidth: 900,
         }}
       >
-        I build web apps that actually work.
+        I build dashboards and internal tools teams rely on.
       </div>
       <div style={{ marginTop: 30, fontSize: 30, color: "#F7EFDD" }}>
-        Next.js &amp; React Developer · based in Egypt
+        Next.js &amp; React Developer · Egypt
       </div>
       <div
         style={{
