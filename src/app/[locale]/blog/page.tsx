@@ -10,6 +10,10 @@ import {
 import { PostCard } from "@/components/blog/PostCard";
 import type { Locale } from "@/i18n/types";
 
+// ISR: cached pages refresh periodically so date-scheduled posts go live
+// without a request; immediate publishes still revalidate via the content API.
+export const revalidate = 900;
+
 export async function generateMetadata({
   params,
 }: {

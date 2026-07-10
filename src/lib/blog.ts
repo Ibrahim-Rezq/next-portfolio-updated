@@ -49,7 +49,7 @@ export async function getAllPosts(locale: Locale): Promise<PostMeta[]> {
     const rows = (await sql`
       SELECT slug, lang, title, excerpt, content, tags, date, cover_image
       FROM posts
-      WHERE lang = ${locale}
+      WHERE lang = ${locale} AND date <= CURRENT_DATE
       ORDER BY date DESC
     `) as PostRow[];
 
@@ -76,34 +76,17 @@ export async function getPost(
   locale: Locale,
 ): Promise<Post | null> {
   try {
-    const localeRows = (await sql`
-      SELECT lang FROM posts WHERE slug = ${slug} ORDER BY lang
-    `) as { lang: string }[];
-
-    if (localeRows.length === 0) return null;
-
-    const availableLocales = localeRows.map((r) => r.lang as Locale);
-
-    const exactRows = (await sql`
+    const rows = (await sql`
       SELECT slug, lang, title, excerpt, content, tags, date, cover_image
-      FROM posts WHERE slug = ${slug} AND lang = ${locale}
+      FROM posts WHERE slug = ${slug} AND date <= CURRENT_DATE
+      ORDER BY lang
     `) as PostRow[];
 
-    let row: PostRow;
-    let isFallback = false;
+    if (rows.length === 0) return null;
 
-    if (exactRows.length > 0) {
-      row = exactRows[0];
-    } else {
-      const fallback = availableLocales[0];
-      const fallbackRows = (await sql`
-        SELECT slug, lang, title, excerpt, content, tags, date, cover_image
-        FROM posts WHERE slug = ${slug} AND lang = ${fallback}
-      `) as PostRow[];
-      if (fallbackRows.length === 0) return null;
-      row = fallbackRows[0];
-      isFallback = true;
-    }
+    const availableLocales = rows.map((r) => r.lang as Locale);
+    const row = rows.find((r) => r.lang === locale) ?? rows[0];
+    const isFallback = row.lang !== locale;
 
     return {
       slug: row.slug,

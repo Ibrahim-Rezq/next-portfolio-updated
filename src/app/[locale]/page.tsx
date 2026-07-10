@@ -8,6 +8,10 @@ import { Contact } from "@/components/sections/Contact";
 import { getAllPosts } from "@/lib/blog";
 import type { Locale } from "@/i18n/types";
 
+// ISR: cached pages refresh periodically so date-scheduled posts go live
+// without a request; immediate publishes still revalidate via the content API.
+export const revalidate = 900;
+
 export default async function Home({
   params,
 }: {

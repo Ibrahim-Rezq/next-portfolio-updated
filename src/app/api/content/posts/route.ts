@@ -76,8 +76,10 @@ export async function POST(request: NextRequest) {
       revalidatePath(`/${loc}/blog`);
       revalidatePath(`/${loc}/blog/${input.slug}`);
     }
+    // Posts dated in the future stay hidden from the site until their date.
+    const scheduled = new Date(input.date) > new Date();
     return NextResponse.json(
-      { success: true, url: `/${input.lang}/blog/${input.slug}` },
+      { success: true, scheduled, url: `/${input.lang}/blog/${input.slug}` },
       { status: 201 },
     );
   } catch (err) {
