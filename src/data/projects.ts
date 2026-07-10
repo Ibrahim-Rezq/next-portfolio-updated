@@ -33,7 +33,7 @@ export const projects: Project[] = [
       en: "A personal site with a blog built in. Kept it minimal on purpose so the work is what stands out.",
       ar: "موقع شخصي مع مدوّنة جواه. خليته بسيط عن قصد عشان الشغل هو اللي يبان.",
     },
-    tech: ["TypeScript", "Next.js", "Contentful CMS"],
+    tech: ["TypeScript", "Next.js", "PostgreSQL"],
     github: "https://github.com/Ibrahim-Rezq",
     live: "https://ibrahim-rezq.vercel.app",
   },

@@ -8,8 +8,7 @@
     "downloadCV": "تحميل السيرة الذاتية",
     "toggleTheme": "تبديل المظهر",
     "toggleLanguage": "بدّل للإنجليزية",
-    "openMenu": "فتح القائمة",
-    "commandHint": "بحث"
+    "openMenu": "فتح القائمة"
   },
   "hero": {
     "eyebrow": "مطوّر Next.js — لوحات التحكم والأدوات الداخلية",
@@ -88,7 +87,9 @@
     "backToAll": "كل المقالات",
     "noPosts": "لا توجد مقالات بعد. تابعنا قريباً.",
     "langFallback": "المقال ده لسّه مش متوفّر بلغتك، فدي النسخة الأصلية.",
-    "postedOn": "نشر في"
+    "postedOn": "نشر في",
+    "notFoundTitle": "المقال مش موجود",
+    "notFoundDesc": "المقال ده مش هنا. يمكن اللينك غلط، أو يمكن أنا شلته."
   },
   "latestPosts": {
     "eyebrow": "من المدوّنة",
@@ -99,21 +100,6 @@
     "tagline": "مصنوع بعناية في مصر.",
     "copyright": "© 2026 إبراهيم أمين",
     "builtWith": "مبنيّ بـ Next.js وقهوة من مصر."
-  },
-  "command": {
-    "placeholder": "اكتب أمراً أو ابحث…",
-    "empty": "لا توجد نتائج.",
-    "groupNav": "تنقّل",
-    "groupActions": "إجراءات",
-    "groupSocial": "تلاقيني هنا",
-    "goHome": "الذهاب للرئيسية",
-    "goAbout": "الذهاب لصفحة عنّي",
-    "goBlog": "الذهاب للمدوّنة",
-    "goWork": "الذهاب للأعمال",
-    "goContact": "الذهاب للتواصل",
-    "toggleTheme": "تبديل المظهر",
-    "toggleLanguage": "تبديل اللغة (عربي / إنجليزي)",
-    "downloadCV": "تحميل السيرة الذاتية"
   },
   "a11y": {
     "skipToContent": "انتقل إلى المحتوى"

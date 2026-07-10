@@ -8,8 +8,7 @@
     "downloadCV": "Download CV",
     "toggleTheme": "Toggle theme",
     "toggleLanguage": "Switch to Arabic",
-    "openMenu": "Open menu",
-    "commandHint": "Search"
+    "openMenu": "Open menu"
   },
   "hero": {
     "eyebrow": "Next.js Developer — Dashboards & Internal Tools",
@@ -88,7 +87,9 @@
     "backToAll": "All posts",
     "noPosts": "No posts yet. Check back soon.",
     "langFallback": "This post isn't available in your language yet, so here's the original.",
-    "postedOn": "Posted on"
+    "postedOn": "Posted on",
+    "notFoundTitle": "Post not found",
+    "notFoundDesc": "This post isn't here. Maybe the link is off, maybe I took it down."
   },
   "latestPosts": {
     "eyebrow": "From the blog",
@@ -99,21 +100,6 @@
     "tagline": "Built with care in Egypt.",
     "copyright": "© 2026 Ibrahim Amin",
     "builtWith": "Built with Next.js & coffee from Egypt."
-  },
-  "command": {
-    "placeholder": "Type a command or search…",
-    "empty": "No results found.",
-    "groupNav": "Navigate",
-    "groupActions": "Actions",
-    "groupSocial": "Find me",
-    "goHome": "Go to Home",
-    "goAbout": "Go to About",
-    "goBlog": "Go to Blog",
-    "goWork": "Go to Work",
-    "goContact": "Go to Contact",
-    "toggleTheme": "Toggle theme",
-    "toggleLanguage": "Switch language (EN / AR)",
-    "downloadCV": "Download CV"
   },
   "a11y": {
     "skipToContent": "Skip to content"

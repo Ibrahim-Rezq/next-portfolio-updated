@@ -9,11 +9,9 @@ export default async function BlogPostNotFound() {
     <div className="flex min-h-[60svh] flex-col items-center justify-center px-5 py-20 text-center">
       <p className="eyebrow">404</p>
       <h1 className="mt-3 text-3xl font-bold text-text-heading">
-        Post not found
+        {t("notFoundTitle")}
       </h1>
-      <p className="mt-3 text-text-muted">
-        This post may have been removed or the URL is incorrect.
-      </p>
+      <p className="mt-3 text-text-muted">{t("notFoundDesc")}</p>
       <Link
         href="/blog"
         className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-teal-700 underline underline-offset-3 hover:text-gold-500"
