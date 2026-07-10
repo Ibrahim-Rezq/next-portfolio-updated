@@ -24,18 +24,30 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const postsByLocale = await Promise.all(
     locales.map((locale) => getAllPosts(locale as Locale)),
   );
-  const slugs = [...new Set(postsByLocale.flat().map((post) => post.slug))];
 
-  const blogEntries: MetadataRoute.Sitemap = slugs.flatMap((slug) =>
-    locales.map((locale) => ({
-      url: `${SITE_URL}/${locale}/blog/${slug}`,
-      lastModified: new Date(),
-      alternates: {
-        languages: Object.fromEntries(
-          locales.map((l) => [l, `${SITE_URL}/${l}/blog/${slug}`]),
-        ) as Record<string, string>,
-      },
-    })),
+  const bySlug = new Map<string, { locales: Locale[]; lastModified: Date }>();
+  for (const post of postsByLocale.flat()) {
+    const entry = bySlug.get(post.slug) ?? {
+      locales: [],
+      lastModified: new Date(post.date),
+    };
+    entry.locales.push(post.lang);
+    const postDate = new Date(post.date);
+    if (postDate > entry.lastModified) entry.lastModified = postDate;
+    bySlug.set(post.slug, entry);
+  }
+
+  const blogEntries: MetadataRoute.Sitemap = [...bySlug.entries()].flatMap(
+    ([slug, { locales: postLocales, lastModified }]) =>
+      postLocales.map((locale) => ({
+        url: `${SITE_URL}/${locale}/blog/${slug}`,
+        lastModified,
+        alternates: {
+          languages: Object.fromEntries(
+            postLocales.map((l) => [l, `${SITE_URL}/${l}/blog/${slug}`]),
+          ) as Record<string, string>,
+        },
+      })),
   );
 
   return [...staticEntries, ...blogEntries];
