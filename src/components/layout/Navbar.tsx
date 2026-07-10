@@ -1,6 +1,6 @@
 "use client";
 
-import { Download, Search } from "lucide-react";
+import { Download } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { Button } from "@/components/ui/button";
@@ -8,7 +8,6 @@ import { Logo } from "@/components/shared/Logo";
 import { ThemeToggle } from "@/components/layout/ThemeToggle";
 import { LocaleToggle } from "@/components/layout/LocaleToggle";
 import { MobileMenu } from "@/components/layout/MobileMenu";
-import { OPEN_COMMAND_EVENT } from "@/components/layout/CommandPalette";
 import { CV_PATH } from "@/data/socials";
 
 export interface NavLink {
@@ -26,8 +25,6 @@ export function Navbar() {
     { href: "/#work", label: t("work") },
     { href: "/#contact", label: t("contact") },
   ];
-
-  const openCommand = () => window.dispatchEvent(new Event(OPEN_COMMAND_EVENT));
 
   return (
     <header className="sticky top-0 z-40 border-b border-border bg-[color-mix(in_srgb,var(--bg-base)_86%,transparent)] backdrop-blur-md">
@@ -54,16 +51,6 @@ export function Navbar() {
               {l.label}
             </Link>
           ))}
-
-          <button
-            type="button"
-            onClick={openCommand}
-            aria-label={t("commandHint")}
-            className="ms-1 inline-flex items-center gap-2 rounded-sm border border-border bg-surface-card px-2.5 py-1.5 text-xs text-text-muted transition-colors hover:text-gold-600"
-          >
-            <Search className="size-3.5" />
-            <kbd className="font-mono text-[11px]">⌘K</kbd>
-          </button>
 
           <span className="mx-1 flex items-center gap-1.5">
             <LocaleToggle />

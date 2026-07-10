@@ -10,7 +10,6 @@ import { Providers } from "@/providers/providers";
 import { SkipLink } from "@/components/shared/SkipLink";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
-import { CommandPalette } from "@/components/layout/CommandPalette";
 import { LocaleTransition } from "@/components/shared/LocaleTransition";
 import "../globals.css";
 
@@ -121,6 +120,8 @@ export default async function LocaleLayout({
       lang={locale}
       dir={dirFor(locale as Locale)}
       className={`${fontVariables} h-full`}
+      // next-themes mutates class/style on <html> before hydration
+      suppressHydrationWarning
     >
       <body className="flex min-h-full flex-col">
         <script
@@ -137,7 +138,6 @@ export default async function LocaleLayout({
               <LocaleTransition>{children}</LocaleTransition>
             </main>
             <Footer />
-            <CommandPalette />
           </Providers>
         </NextIntlClientProvider>
       </body>
